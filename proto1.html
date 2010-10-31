@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>PixelWall Prototype 1</title>
+    <link href="reset.css" rel="stylesheet">
+    <link href="text.css" rel="stylesheet">
+    <script src="jquery.js" type="text/javascript"></script>
+    <script src="jquery.tmpl.js" type="text/javascript"></script>
+    <script src="jquery.disable_text_selection.js" type="text/javascript"></script>
+    <style>
+        body {
+            background-color: #000;
+        }
+
+        #container {
+            height: 600px;
+            width: 0px;
+            margin-top: 200px;
+        }
+
+        img {
+            background-color: #fff;
+            width: 400px;
+            height: 300px;
+            float: left;
+        }
+
+        div.buttons {
+            top: 820px;
+            left: 20px;
+            position: fixed;
+        }
+
+        #play {
+            width: 60px;
+        }
+
+        div.shotsGroup {
+            height: 600px;
+            float: left;
+        }
+
+    </style>
+</head>
+<body>
+
+<script type="text/x-jquery-tmpl" id="shotTemplate">
+    <img src="${image_url}" alt="${title}"/>
+</script>
+
+<script type="text/javascript">
+    $(function() {
+
+        var $shotTemplate = $('#shotTemplate');
+        var $container = $('#container');
+        var $window = $(window).scrollLeft(0);
+
+        function ShotsPull() {
+
+            var shots = [];
+
+            this.currentPage = 1;
+            this.requestAmount = 30;
+
+            this.get = function(n, callback) {
+                if (shots.length - n < this.requestAmount * 2) {
+                    this.requestMore(function(shots) {
+                        callback(shots.splice(0, n));
+                    });
+                } else {
+                    callback(shots.splice(0, n));
+                }
+            };
+
+            this.requestMore = function(callback) {
+                if (!this.requestInProgress) {
+                    this.requestInProgress = true;
+                    $.getJSON('http://api.dribbble.com/shots/popular?callback=?', {per_page: this.requestAmount, page: this.currentPage}, $.proxy(function(data) {
+                        shots = shots.concat(data.shots);
+                        this.requestInProgress = false;
+                        this.currentPage++;
+                        if (callback) callback(shots);
+                        if (shots.length < this.requestAmount * 2) {
+                            this.requestMore();
+                        }
+                    }, this));
+                }
+            };
+
+        }
+
+        var shotsPull = new ShotsPull();
+
+        var autoScroll = false;
+
+        var dragStartPosition;
+        var dragMode = false;
+        $container.bind({
+            'mousedown.timeline': function(event) {
+                dragStartPosition = event.pageX;
+                dragMode = true;
+                $(event.target).bind({
+                    'mousemove.timeline': function(event) {
+                        $(window).scrollLeft($(window).scrollLeft() - event.pageX + dragStartPosition);
+                    },
+                    'mouseup.timeline mouseleave.timeline': function(event) {
+                        $(event.target).unbind('mousemove.timeline mouseup.timeline mouseleave.timeline');
+                        dragMode = false;
+                    }
+                });
+                return false;
+            }
+        });
+
+        $window.scroll(function() {
+            var viewEnd = $window.scrollLeft() + $window.width() + 800;
+            if ($container.find('div.shotsGroup:last').offset().left < viewEnd) {
+                shotsPull.get(4, renderShots);
+            }
+        });
+
+        shotsPull.get(12, renderShots);
+
+        setInterval(function() {
+            if (autoScroll && !dragMode) {
+                $(window).scrollLeft($(window).scrollLeft() + 2);
+            }
+        }, 25);
+
+        $('#play').click(function() {
+            this.innerHTML = this.innerHTML == 'Pause' ? 'Play' : 'Pause';
+            autoScroll = !autoScroll;
+        });
+
+        $('#getMore').click(function() {
+            shotsPull.get(4, renderShots);
+        });
+
+        function renderShots(shots) {
+            $container.width($container.width() + 200 * shots.length);
+            var $shotsGroup = $('<div>', {
+                class: 'shotsGroup',
+                css: {width: 200 * shots.length} 
+            }).appendTo($container);
+            $shotTemplate.tmpl(shots).appendTo($shotsGroup);
+        }
+
+    });
+</script>
+
+<div id="container"></div>
+<div class="buttons">
+    <button id="play">Play</button>
+    <button id="getMore">Manually Get 4 Shots</button>
+</div>
+
+</body>
+</html>
