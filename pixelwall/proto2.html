@@ -16,7 +16,7 @@
             width: 0px;
             cursor: move;
             position: absolute;
-            top: 100px;
+            top: 20px;
             left: 0;
         }
 
@@ -111,8 +111,8 @@
         function renderShots(shots) {
             $container.width($container.width() + 200 * shots.length);
             var $shotsGroup = $('<div>', {
-                class: 'shotsGroup',
-                css: {width: 200 * shots.length}
+                'class': 'shotsGroup',
+                'css': {width: 200 * shots.length}
             }).appendTo($container);
             $shotTemplate.tmpl(shots).appendTo($shotsGroup);
         }

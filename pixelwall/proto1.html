@@ -14,7 +14,7 @@
         #container {
             height: 600px;
             width: 0px;
-            margin-top: 200px;
+            margin-top: 20px;
         }
 
         img {
@@ -138,8 +138,8 @@
         function renderShots(shots) {
             $container.width($container.width() + 200 * shots.length);
             var $shotsGroup = $('<div>', {
-                class: 'shotsGroup',
-                css: {width: 200 * shots.length} 
+                'class': 'shotsGroup',
+                'css': {width: 200 * shots.length} 
             }).appendTo($container);
             $shotTemplate.tmpl(shots).appendTo($shotsGroup);
         }
