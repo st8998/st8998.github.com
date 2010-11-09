@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>PixelWall Prototype 3</title>
+    <link href="reset.css" rel="stylesheet">
+    <link href="text.css" rel="stylesheet">
+    <script src="jquery.js" type="text/javascript"></script>
+    <script src="jquery.tmpl.js" type="text/javascript"></script>    
+    <style>
+        body {
+            background: #000 url('images/bg_lines_pattern.png');
+        }
+
+        #container {
+            height: 600px;
+            width: 0;
+            cursor: move;
+            position: absolute;
+            top: 20px;
+            left: 0;
+        }
+
+        img {
+            background-color: #fff;
+            width: 400px;
+            height: 300px;
+            float: left;
+        }
+
+        div.shotsGroup {
+            height: 600px;
+            float: left;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+    </style>
+</head>
+<body>
+
+<script type="text/x-jquery-tmpl" id="shotTemplate">
+    <img src="${image_url}" alt="${title}"/>
+</script>
+
+<script type="text/javascript">
+    $(function() {
+
+        var $shotTemplate = $('#shotTemplate');
+        var $container = $('#container');
+        var $window = $(window).scrollLeft(0);
+
+        function ShotsPull() {
+
+            var shots = [];
+
+            this.currentPage = 1;
+            this.requestAmount = 30;
+
+            this.get = function(n, callback) {
+                if (shots.length - n < this.requestAmount * 2) {
+                    this.requestMore(function(shots) {
+                        callback(shots.splice(0, n));
+                    });
+                } else {
+                    callback(shots.splice(0, n));
+                }
+            };
+
+            this.requestMore = function(callback) {
+                if (!this.requestInProgress) {
+                    this.requestInProgress = true;
+                    $.getJSON('http://api.dribbble.com/shots/popular?callback=?', {per_page: this.requestAmount, page: this.currentPage}, $.proxy(function(data) {
+                        shots = shots.concat(data.shots);
+                        this.requestInProgress = false;
+                        this.currentPage++;
+                        if (callback) callback(shots);
+                        if (shots.length < this.requestAmount * 2) {
+                            this.requestMore();
+                        }
+                    }, this));
+                }
+            };
+
+        }
+
+        // INITIAL config part
+
+        var shotsPull = new ShotsPull();
+
+        shotsPull.get(30, renderShots);
+
+        function viewScrollListener() {
+            var viewOffset = Math.abs($container.offset().left) + $window.width() + 800;
+            if ($container.width() < viewOffset) {
+                shotsPull.get(4, renderShots);
+            }
+        }
+
+        function renderShots(shots) {
+            $container.width($container.width() + 200 * shots.length);
+            var $shotsGroup = $('<div>', {
+                'class': 'shotsGroup',
+                'css': {width: 200 * shots.length}
+            }).appendTo($container);
+            $shotTemplate.tmpl(shots).appendTo($shotsGroup);
+        }
+
+        // SCROLLING part
+
+        var scrollRange = 400.0,
+                bounceHeight = 200.0,
+                animationTimestep = 1 / 20.0,
+                mouseDownPoint = null,
+                translatedMouseDownPoint = null,
+                currentMousePoint = null,
+                animationTimer = null,
+                velocity = 0,
+                position = 0,
+                returnToBaseConst = 1.5,
+                decelerationConst = 300.0,
+                bounceDecelerationConst = 1500.0;
+
+        function scrollViewRight(event) {
+            scrollRange = $container.width() - $window.width();
+            if (animationTimer) stopAnimation();
+            mouseDownPoint = event.screenX;
+            translatedMouseDownPoint = mouseDownPoint;
+            currentMousePoint = mouseDownPoint;
+            return false;
+        }
+
+        function scrollViewLeft(event) {
+            mouseDownPoint = null;
+            currentMousePoint = null;
+            translatedMouseDownPoint = null;
+            animationTimer = setInterval(updateScrollView, 10);
+        }
+
+        function scrollViewMove(event) {
+            if (!mouseDownPoint) return;
+            currentMousePoint = event.screenX;
+            updateScrollView(true);
+        }
+
+        function updateScrollView(mouseMove) {
+            // If mouse is still down, just scroll instantly to point
+            if (mouseMove) {
+                // First assume not beyond limits
+                var displacement = currentMousePoint - translatedMouseDownPoint;
+                velocity = displacement / animationTimestep;
+                translatedMouseDownPoint = currentMousePoint;
+
+                // If scrolled beyond top or bottom, dampen velocity to prevent going
+                // beyond bounce height
+                if ((position > 0 && velocity > 0) || ( position < -1 * scrollRange && velocity < 0)) {
+                    var displace = ( position > 0 ? position : position + scrollRange );
+                    velocity *= (1.0 - Math.abs(displace) / bounceHeight);
+                }
+            }
+            else {
+                if (position > 0) {
+                    // If reach the top bound, bounce back
+                    if (velocity <= 0) {
+                        // Return to 0 position
+                        velocity = -1 * returnToBaseConst * Math.abs(position);
+                    }
+                    else {
+                        // Slow down in order to turn around
+                        var change = bounceDecelerationConst * animationTimestep;
+                        velocity -= change;
+                    }
+                }
+                else if (position < -1 * scrollRange) {
+                    // If reach bottom bound, bounce back
+                    if (velocity >= 0) {
+                        // Return to bottom position
+                        velocity = returnToBaseConst * Math.abs(position + scrollRange);
+                    }
+                    else {
+                        // Slow down
+                        var change = bounceDecelerationConst * animationTimestep;
+                        velocity += change;
+                    }
+                }
+                else {
+                    // Free scrolling. Decelerate gradually.
+                    var changevelocity = decelerationConst * animationTimestep;
+                    if (changevelocity > Math.abs(velocity)) {
+                        velocity = 0;
+                        stopAnimation();
+                    }
+                    else {
+                        velocity -= (velocity > 0 ? +1 : -1) * changevelocity;
+                    }
+                }
+            }
+
+            // Update position
+            position += velocity * animationTimestep;
+
+            // Update view
+            $container.css('left', Math.round(position));
+
+            viewScrollListener();
+        }
+
+        function stopAnimation() {
+            clearInterval(animationTimer);
+            animationTimer = null;
+        }
+
+        $container.bind({
+            'mousedown.pixelwall': scrollViewRight,
+            'mouseup.pixelwall': scrollViewLeft,
+            'mouseleave.pixelwall': scrollViewLeft,
+            'mousemove.pixelwall': scrollViewMove
+        });
+
+    });
+</script>
+
+<div id="container"></div>
+
+</body>
+</html>
