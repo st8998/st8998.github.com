@@ -111,7 +111,7 @@
 
         var scrollRange = 400.0,
                 bounceHeight = 200.0,
-                animationTimestep = 1 / 10.0,
+                animationTimestep = 1/10.0,
                 mouseDownPoint = null,
                 translatedMouseDownPoint = null,
                 currentMousePoint = null,
@@ -119,7 +119,7 @@
                 velocity = 0,
                 position = 0,
                 returnToBaseConst = 1.5,
-                decelerationConst = 100.0,
+                decelerationConst = 200.0,
                 bounceDecelerationConst = 1500.0;
 
         function scrollViewRight(event) {
@@ -128,13 +128,24 @@
             mouseDownPoint = event.screenX;
             translatedMouseDownPoint = mouseDownPoint;
             currentMousePoint = mouseDownPoint;
+            velocity = 0;
             return false;
         }
 
         function scrollViewLeft(event) {
+            if (!mouseDownPoint) return;
             mouseDownPoint = null;
             currentMousePoint = null;
             translatedMouseDownPoint = null;
+            if (animationTimer) stopAnimation();
+            animationTimer = setInterval(updateScrollView, 10);
+        }
+        function scrollViewOut(event) {
+            if (!mouseDownPoint) return;
+            mouseDownPoint = null;
+            currentMousePoint = null;
+            translatedMouseDownPoint = null;
+            if (animationTimer) stopAnimation();
             animationTimer = setInterval(updateScrollView, 10);
         }
 
@@ -146,7 +157,7 @@
 
         function updateScrollView(mouseMove) {
             // If mouse is still down, just scroll instantly to point
-            if (mouseMove) {
+            if (mouseMove && mouseDownPoint) {
                 // First assume not beyond limits
                 var displacement = currentMousePoint - translatedMouseDownPoint;
                 velocity = displacement / animationTimestep;
@@ -185,24 +196,25 @@
                     }
                 }
                 else {
+                    var inVelocity = velocity;
                     // Free scrolling. Decelerate gradually.
-                    var changevelocity = decelerationConst * animationTimestep;
-                    if (changevelocity > Math.abs(velocity)) {
+                    var changeVelocity = decelerationConst * animationTimestep;
+                    if (changeVelocity > Math.abs(velocity)) {
                         velocity = 0;
                         stopAnimation();
                     }
                     else {
-                        velocity -= (velocity > 0 ? +1 : -1) * changevelocity;
+                        velocity -= ((velocity > 0 ? +1 : -1) * changeVelocity);
                     }
                 }
             }
 
             // Update position
-            position += velocity * animationTimestep;
+            position += (velocity > 0 ? +1 : -1)*(Math.abs(velocity * animationTimestep) > 1 ? Math.abs(velocity * animationTimestep) : 1);
+            position = Math.round(position);
 
             // Update view
-            $container.css('left', Math.round(position));
-
+            $container.css('left', position);
             viewScrollListener();
         }
 
@@ -214,7 +226,7 @@
         $container.bind({
             'mousedown.pixelwall': scrollViewRight,
             'mouseup.pixelwall': scrollViewLeft,
-            'mouseleave.pixelwall': scrollViewLeft,
+            'mouseleave.pixelwall': scrollViewOut,
             'mousemove.pixelwall': scrollViewMove
         });
 

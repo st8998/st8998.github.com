@@ -111,7 +111,7 @@
 
         var scrollRange = 400.0,
                 bounceHeight = 200.0,
-                animationTimestep = 1 / 20.0,
+                animationTimestep = 1 / 10.0,
                 mouseDownPoint = null,
                 translatedMouseDownPoint = null,
                 currentMousePoint = null,
@@ -204,7 +204,7 @@
             // Update view
             $container.css('left', Math.round(position));
 
-            viewScrollListener();
+//            viewScrollListener();
         }
 
         function stopAnimation() {
