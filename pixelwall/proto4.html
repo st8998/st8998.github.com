@@ -93,13 +93,6 @@
 
         shotsPull.get(30, renderShots);
 
-        function viewScrollListener() {
-            var viewOffset = Math.abs($container.offset().left) + $window.width() + 800;
-            if ($container.width() < viewOffset) {
-                shotsPull.get(4, renderShots);
-            }
-        }
-
         function renderShots(shots) {
             $container.width($container.width() + 200 * shots.length);
             var $shotsGroup = $('<div>', {
@@ -123,6 +116,13 @@
                 returnToBaseConst = 1.5,
                 decelerationConst = 150.0,
                 bounceDecelerationConst = 1500.0;
+
+        function viewScrollListener() {
+            var viewOffset = Math.abs(position) + $window.width() + 1600;
+            if ($container.width() < viewOffset) {
+                shotsPull.get(4, renderShots);
+            }
+        }
 
         function scrollViewRight(event) {
             scrollRange = $container.width() - $window.width();
