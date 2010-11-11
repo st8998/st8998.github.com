@@ -20,6 +20,7 @@
         mouseDownPoint: null,
         mouseDownPointP: null,
         translatedMouseDownPoint: null,
+        moved: false,
 
         _create: function() {
             if (this.options.orientation == 'X') {
@@ -51,6 +52,12 @@
                 'mouseleave.pixelwall': $.proxy(this._dragStopListener, this),
                 'mousemove.pixelwall': $.proxy(this._dragListener, this)
             });
+
+            this.element.bind('click', $.proxy(function(event) {
+                if (this.moved) {
+                    return false;
+                }
+            }, this));
         },
 
         _dragStartListener: function(stub, event) {
@@ -62,8 +69,9 @@
             this.velocity = 0;
         },
 
-        _dragStopListener: function() {
+        _dragStopListener: function(event) {
             if (!this.mouseDownPoint) return;
+            this.moved = this.mouseDownPoint != this.currentMousePoint; 
             this.mouseDownPoint = null;
             this.currentMousePoint = null;
             this.translatedMouseDownPoint = null;
