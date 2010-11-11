@@ -1,11 +1,13 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>PixelWall Prototype 1</title>
+    <title>PixelWall Prototype 5</title>
     <link href="stylesheets/reset.css" rel="stylesheet">
     <link href="stylesheets/text.css" rel="stylesheet">
     <script src="javascripts/jquery.js" type="text/javascript"></script>
     <script src="javascripts/jquery.tmpl.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.ui.widget.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.ui.mousescroll.js" type="text/javascript"></script>
     <style>
         body {
             background: #000 url('images/bg_lines_pattern.png');
@@ -13,8 +15,13 @@
 
         #container {
             height: 600px;
-            width: 0px;
-            margin-top: 20px;
+            width: 0;
+            cursor: move;
+            position: absolute;
+            top: 20px;
+            left: 0;
+            -webkit-transition: all 0;
+            -moz-transition: all 0;
         }
 
         img {
@@ -24,19 +31,25 @@
             float: left;
         }
 
-        div.buttons {
-            top: 820px;
-            left: 20px;
-            position: fixed;
-        }
-
-        #play {
-            width: 60px;
-        }
-
         div.shotsGroup {
             height: 600px;
             float: left;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        #test {
+            width: 400px;
+            height: 300px;
+            position: relative;
+        }
+
+        #test div {
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
     </style>
@@ -88,70 +101,34 @@
 
         }
 
+        // INITIAL config part
+
         var shotsPull = new ShotsPull();
 
-        var autoScroll = false;
-
-        var dragStartPosition;
-        var dragMode = false;
-        $container.bind({
-            'mousedown.timeline': function(event) {
-                dragStartPosition = event.pageX;
-                dragMode = true;
-                $(event.target).bind({
-                    'mousemove.timeline': function(event) {
-                        $(window).scrollLeft($(window).scrollLeft() - event.pageX + dragStartPosition);
-                    },
-                    'mouseup.timeline mouseleave.timeline': function(event) {
-                        $(event.target).unbind('mousemove.timeline mouseup.timeline mouseleave.timeline');
-                        dragMode = false;
-                    }
-                });
-                return false;
-            }
-        });
-
-        $window.scroll(function() {
-            var viewEnd = $window.scrollLeft() + $window.width() + 800;
-            if ($container.find('div.shotsGroup:last').offset().left < viewEnd) {
-                shotsPull.get(4, renderShots);
-            }
-        });
-
-        shotsPull.get(12, renderShots);
-
-        setInterval(function() {
-            if (autoScroll && !dragMode) {
-                $(window).scrollLeft($(window).scrollLeft() + 2);
-            }
-        }, 25);
-
-        $('#play').click(function() {
-            this.innerHTML = this.innerHTML == 'Pause' ? 'Play' : 'Pause';
-            autoScroll = !autoScroll;
-        });
-
-        $('#getMore').click(function() {
-            shotsPull.get(4, renderShots);
-        });
+//        shotsPull.get(30, renderShots);
 
         function renderShots(shots) {
             $container.width($container.width() + 200 * shots.length);
             var $shotsGroup = $('<div>', {
                 'class': 'shotsGroup',
-                'css': {width: 200 * shots.length} 
+                'css': {width: 200 * shots.length}
             }).appendTo($container);
             $shotTemplate.tmpl(shots).appendTo($shotsGroup);
         }
 
+        $('#test div').mouseScroll({
+            scrollRange: 1,
+            bounceSize: 100
+        });
+
     });
 </script>
 
-<div id="container"></div>
-<div class="buttons">
-    <button id="play">Play</button>
-    <button id="getMore">Manually Get 4 Shots</button>
-</div>
 
+<div id="test" style="background-color: #fff">
+    <div>
+        <img src="http://dribbble.com/system/users/536/screenshots/77607/shot_1289430469.png">
+    </div>
+</div>
 </body>
 </html>
