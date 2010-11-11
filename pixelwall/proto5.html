@@ -4,60 +4,23 @@
     <title>PixelWall Prototype 5</title>
     <link href="stylesheets/reset.css" rel="stylesheet">
     <link href="stylesheets/text.css" rel="stylesheet">
+    <link href="stylesheets/main.css" rel="stylesheet">
     <script src="javascripts/jquery.js" type="text/javascript"></script>
     <script src="javascripts/jquery.tmpl.js" type="text/javascript"></script>
     <script src="javascripts/jquery.ui.widget.js" type="text/javascript"></script>
     <script src="javascripts/jquery.ui.mousescroll.js" type="text/javascript"></script>
+    <script src="javascripts/shotspull.js" type="text/javascript"></script>
     <style>
-        body {
-            background: #000 url('images/bg_lines_pattern.png');
-        }
-
-        #container {
-            height: 600px;
-            width: 0;
-            cursor: move;
-            position: absolute;
-            top: 20px;
-            left: 0;
-            -webkit-transition: all 0;
-            -moz-transition: all 0;
-        }
-
-        img {
-            background-color: #fff;
-            width: 400px;
-            height: 300px;
-            float: left;
-        }
-
-        div.shotsGroup {
-            height: 600px;
-            float: left;
-        }
-
-        body {
-            overflow: hidden;
-        }
-
-        #test {
-            width: 400px;
-            height: 300px;
-            position: relative;
-        }
-
-        #test div {
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
 
     </style>
 </head>
 <body>
 
 <script type="text/x-jquery-tmpl" id="shotTemplate">
-    <img src="${image_url}" alt="${title}"/>
+    <div class="shot">
+        <p>LOADING</p>
+        <img src="${image_url}" alt="${title}"/>
+    </div>
 </script>
 
 <script type="text/javascript">
@@ -67,45 +30,9 @@
         var $container = $('#container');
         var $window = $(window).scrollLeft(0);
 
-        function ShotsPull() {
-
-            var shots = [];
-
-            this.currentPage = 1;
-            this.requestAmount = 30;
-
-            this.get = function(n, callback) {
-                if (shots.length - n < this.requestAmount * 2) {
-                    this.requestMore(function(shots) {
-                        callback(shots.splice(0, n));
-                    });
-                } else {
-                    callback(shots.splice(0, n));
-                }
-            };
-
-            this.requestMore = function(callback) {
-                if (!this.requestInProgress) {
-                    this.requestInProgress = true;
-                    $.getJSON('http://api.dribbble.com/shots/popular?callback=?', {per_page: this.requestAmount, page: this.currentPage}, $.proxy(function(data) {
-                        shots = shots.concat(data.shots);
-                        this.requestInProgress = false;
-                        this.currentPage++;
-                        if (callback) callback(shots);
-                        if (shots.length < this.requestAmount * 2) {
-                            this.requestMore();
-                        }
-                    }, this));
-                }
-            };
-
-        }
-
-        // INITIAL config part
-
         var shotsPull = new ShotsPull();
 
-//        shotsPull.get(30, renderShots);
+        shotsPull.get(30, renderShots);
 
         function renderShots(shots) {
             $container.width($container.width() + 200 * shots.length);
@@ -114,21 +41,24 @@
                 'css': {width: 200 * shots.length}
             }).appendTo($container);
             $shotTemplate.tmpl(shots).appendTo($shotsGroup);
+            $container.mouseScroll('option', 'scrollRange', $container.width() - $window.width());
+            $shotsGroup.find('.shot img').mouseScroll({
+                scrollRange: 50,
+                bounceSize: 50,
+                orientation: 'y'
+            });
         }
 
-        $('#test div').mouseScroll({
-            scrollRange: 1,
-            bounceSize: 100
-        });
+        $container.mouseScroll();
+
+//        $shotTemplate.tmpl({title: 'test', image_url: 'http://dribbble.com/system/users/536/screenshots/77607/shot_1289430469.png'}).appendTo($container);
+//        $container.find('.shot img').mouseScroll({
+//            scrollRange: 1,
+//            bounceSize: 200
+//        });
 
     });
 </script>
-
-
-<div id="test" style="background-color: #fff">
-    <div>
-        <img src="http://dribbble.com/system/users/536/screenshots/77607/shot_1289430469.png">
-    </div>
-</div>
+<div id="container"></div>
 </body>
 </html>

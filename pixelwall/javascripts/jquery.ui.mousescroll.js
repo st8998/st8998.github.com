@@ -8,41 +8,58 @@
             returnToBaseConst: 1.5,
             decelerationConst: 150.0,
             bounceDecelerationConst: 1500.0,
-            animationStep: 10
+            animationStep: 10,
+            orientation: 'X'
         },
 
-        magic: 1/10.0,
+        magic: 1 / 10.0,
         velocity: 0,
         position: 0,
         animationTimer: null,
         currentMousePoint: null,
         mouseDownPoint: null,
+        mouseDownPointP: null,
         translatedMouseDownPoint: null,
 
         _create: function() {
-            this.position = this.element.position().top;
-            this.element.css('top', 0);
-            this._updateView(true);
+            if (this.options.orientation == 'X') {
+                this.position = this.element.position().left;
+                this.element.css('left', 0);
+                this._updateView(true);
 
-            if (!this.options.scrollRange) {
-                this.options.scrollRange = this.element.width() - this.element.parent().width();
+                if (!this.options.scrollRange) {
+                    this.options.scrollRange = this.element.width() - this.element.parent().width();
+                }
+            } else {
+                this.position = this.element.position().top;
+                this.element.css('top', 0);
+                this._updateView(true);
+
+                if (!this.options.scrollRange) {
+                    this.options.scrollRange = this.element.height() - this.element.parent().height();
+                }
             }
 
+            this.element.bind('mousedown', function(e) {
+                $(this).trigger('mymousedown', [e]);
+                return false;
+            });
+
             this.element.bind({
-                'mousedown.pixelwall': $.proxy(this._dragStartListener, this),
+                'mymousedown.pixelwall': $.proxy(this._dragStartListener, this),
                 'mouseup.pixelwall': $.proxy(this._dragStopListener, this),
                 'mouseleave.pixelwall': $.proxy(this._dragStopListener, this),
                 'mousemove.pixelwall': $.proxy(this._dragListener, this)
             });
         },
 
-        _dragStartListener: function(event) {
+        _dragStartListener: function(stub, event) {
             if (this.animationTimer) this._stopAnimation();
-            this.mouseDownPoint = event.pageY;
+            this.mouseDownPoint = this.options.orientation == 'X' ? event.pageX : event.pageY;
+            this.mouseDownPointP = this.options.orientation == 'X' ? event.pageY : event.pageX;
             this.translatedMouseDownPoint = this.mouseDownPoint;
             this.currentMousePoint = this.mouseDownPoint;
             this.velocity = 0;
-            return false;
         },
 
         _dragStopListener: function() {
@@ -56,8 +73,15 @@
 
         _dragListener: function(event) {
             if (!this.mouseDownPoint) return;
-            this.currentMousePoint = event.pageY;
-            this._updateView(true);
+            var currentMousePoint = this.options.orientation == 'X' ? event.pageX : event.pageY;
+            var currentMousePointP = this.options.orientation == 'X' ? event.pageY : event.pageX;
+            if (!this.mouseDownPointP || (Math.abs(this.mouseDownPoint - currentMousePoint) - Math.abs(this.mouseDownPointP - currentMousePointP) > 20)) {
+                this.mouseDownPointP = null;
+                this.element.parent().trigger('mouseleave.pixelwall');
+                event.stopPropagation();
+                this.currentMousePoint = currentMousePoint;
+                this._updateView(true);
+            }
         },
 
         _updateView: function(manualMove) {
@@ -98,12 +122,19 @@
                     velocity *= (1.0 - Math.abs(position > 0 ? position : position + options.scrollRange) / options.bounceSize)
                 }
 
-                // Update position
-                position += Math.round(velocity > 0 ? +1 : -1) * Math.max(Math.abs(velocity * magic), 1);
+                if (velocity != 0) {
+                    // Update position
+                    position += Math.round(velocity > 0 ? +1 : -1) * Math.max(Math.abs(velocity * magic), 1);
 
-                // Update View
-                element.css('-webkit-transform', 'translate(0,' + position + 'px)');
-                element.css('-moz-transform', 'translate(0,' + position + 'px)');
+                    // Update View
+                    if (options.orientation == 'X') {
+                        element.css('-webkit-transform', 'translate(' + position + 'px, 0)');
+                        element.css('-moz-transform', 'translate(' + position + 'px, 0)');
+                    } else {
+                        element.css('-webkit-transform', 'translate(0,' + position + 'px)');
+                        element.css('-moz-transform', 'translate(0,' + position + 'px)');
+                    }
+                }
             }
         },
 
