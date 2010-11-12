@@ -7,7 +7,7 @@ body {
     width: 0;
     cursor: move;
     position: absolute;
-    top: 200px;
+    top: 20px;
     left: 0;
     -webkit-transition: all 0;
     -moz-transition: all 0;
@@ -44,4 +44,12 @@ div.shot img {
     left: 0;
     width: 400px;
     height: 300px;
+    z-index: 2;
+}
+
+div.shot div.buttons {
+    position: absolute;
+    z-index: 1;
+    bottom: 10px;
+    right: 10px;
 }

@@ -20,6 +20,10 @@
     <div class="shot">
         <p>LOADING</p>
         <img src="${image_url}" alt="${title}"/>
+
+        <div class="buttons">
+            <a href="${short_url}" target="_blank">Origin Page</a>
+        </div>
     </div>
 </script>
 
@@ -28,7 +32,7 @@
 
         var $shotTemplate = $('#shotTemplate');
         var $container = $('#container');
-        var $window = $(window).scrollLeft(0);
+        var $window = $(window);
 
         var shotsPull = new ShotsPull();
 
@@ -43,7 +47,7 @@
             $shotTemplate.tmpl(shots).appendTo($shotsGroup);
             $container.mouseScroll('option', 'scrollRange', $container.width() - $window.width());
             $shotsGroup.find('.shot img').mouseScroll({
-                scrollRange: 50,
+                scrollRange: 100,
                 bounceSize: 50,
                 orientation: 'y'
             });
