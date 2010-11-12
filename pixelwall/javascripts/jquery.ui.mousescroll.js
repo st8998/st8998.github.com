@@ -134,6 +134,8 @@
                     // Update position
                     position += Math.round(velocity > 0 ? +1 : -1) * Math.max(Math.abs(velocity * magic), 1);
 
+                    element.trigger('mousescroll', [position,  velocity, options.orientation]);
+
                     // Update View
                     if (options.orientation == 'X') {
                         element.css('-webkit-transform', 'translate(' + position + 'px, 0)');
@@ -154,6 +156,16 @@
         scroll: function(shift) {
             this.position += shift;
             this._updateView(true);
+        },
+
+        pull: function(velocity) {
+            this.velocity = velocity;
+            if (this.animationTimer) this._stopAnimation();
+            this.animationTimer = setInterval($.proxy(this._updateView, this), this.options.animationStep);
+        },
+
+        currentPosition: function() {
+            return this.position;
         },
 
         destroy: function() {

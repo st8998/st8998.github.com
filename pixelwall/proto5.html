@@ -18,7 +18,7 @@
 
 <script type="text/x-jquery-tmpl" id="shotTemplate">
     <div class="shot">
-        <p>LOADING</p>
+        <div class="preloader"></div>
         <img src="${image_url}" alt="${title}"/>
 
         <div class="buttons">
@@ -47,13 +47,29 @@
             $shotTemplate.tmpl(shots).appendTo($shotsGroup);
             $container.mouseScroll('option', 'scrollRange', $container.width() - $window.width());
             $shotsGroup.find('.shot img').mouseScroll({
-                scrollRange: 100,
+                scrollRange: 50,
                 bounceSize: 50,
                 orientation: 'y'
             });
         }
 
-        $container.mouseScroll();
+        $container.mouseScroll().bind('mousescroll', function(event, position) {
+            var viewOffset = Math.abs(position) + $window.width() + 1600;
+            if ($container.width() < viewOffset) {
+                shotsPull.get(8, renderShots);
+            }
+        });
+
+        $container.find('div.shot img').live('click', function() {
+            if ($(this).mouseScroll('currentPosition') < -1) {
+                $(this).mouseScroll('pull', 500);
+            }
+        });
+        $container.find('div.shot div.buttons').live('click', function() {
+            if ($(this).parent().find('img').mouseScroll('currentPosition') < -1) {
+                $(this).parent().find('img').mouseScroll('pull', 500);
+            }
+        });
 
     });
 </script>
