@@ -94,7 +94,7 @@
 
         _updateView: function(manualMove) {
             with (this) {
-                if (manualMove && mouseDownPoint) {
+                if (manualMove === true) {
                     // If mouse is still down, just scroll to point
                     velocity = (currentMousePoint - translatedMouseDownPoint) / magic;
                     translatedMouseDownPoint = currentMousePoint;
@@ -130,9 +130,11 @@
                     velocity *= (1.0 - Math.abs(position > 0 ? position : position + options.scrollRange) / options.bounceSize)
                 }
 
-                if (velocity != 0) {
+                if (velocity != 0 || manualMove) {
                     // Update position
                     position += Math.round(velocity > 0 ? +1 : -1) * Math.max(Math.abs(velocity * magic), 1);
+
+                    element.trigger('mousescroll', [position,  velocity, options.orientation]);
 
                     // Update View
                     if (options.orientation == 'X') {
@@ -151,9 +153,19 @@
             this.animationTimer = null;
         },
 
-        scroll: function(shift) {
-            this.position += shift;
+        scrollTo: function(position) {
+            this.position = position;
             this._updateView(true);
+        },
+
+        pull: function(velocity) {
+            this.velocity = velocity;
+            if (this.animationTimer) this._stopAnimation();
+            this.animationTimer = setInterval($.proxy(this._updateView, this), this.options.animationStep);
+        },
+
+        currentPosition: function() {
+            return this.position;
         },
 
         destroy: function() {

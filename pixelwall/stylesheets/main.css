@@ -7,7 +7,7 @@ body {
     width: 0;
     cursor: move;
     position: absolute;
-    top: 200px;
+    top: 20px;
     left: 0;
     -webkit-transition: all 0;
     -moz-transition: all 0;
@@ -26,16 +26,14 @@ div.shot {
     width: 400px;
     height: 300px;
     position: relative;
-    background-color: #EEE;
     float: left;
 }
 
-div.shot p {
+div.shot div.preloader {
     margin: 0;
-    line-height: 300px;
-    font-size: 500%;
-    text-align: center;
-    color: #CCC;
+    width: 400px;
+    height: 300px;
+    background: #505050;
 }
 
 div.shot img {
@@ -44,4 +42,12 @@ div.shot img {
     left: 0;
     width: 400px;
     height: 300px;
+    z-index: 2;
+}
+
+div.shot div.buttons {
+    position: absolute;
+    z-index: 1;
+    bottom: 10px;
+    right: 10px;
 }
