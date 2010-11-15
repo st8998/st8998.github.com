@@ -1,0 +1,234 @@
+@linkBackground: #DAE1EB;
+@linkBorder: #CAD1D9;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #fff;
+    text-align: left;
+    font-family: tahoma, arial, verdana, sans-serif, Lucida Sans;
+    font-size: 11px;
+    overflow: scroll;
+}
+
+a {
+    color: #2B587A;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+ul, ul li {
+    list-style: none;
+}
+
+#wrapper {
+    margin: 0 auto;
+    width: 791px;
+}
+
+#header {
+    height: 45px;
+    background: url('images/header.gif') no-repeat;
+    form {
+        float: right;
+        input {
+            color: #777;
+            border: 1px solid;
+            height: 18px;
+            width: 85px;
+            font-size: 11px;
+            margin: 11px 10px;
+        }
+    }
+}
+
+#topNav {
+    float: right;
+    background: url('images/header_divider.gif') right no-repeat;
+
+    li {
+        display: block;
+        float: left;
+    }
+    a {
+        line-height: 45px;
+        color: #DAE1E8;
+        display: block;
+        font-weight: bold;
+        padding: 0 9px;
+        background: url('images/header_divider.gif') left no-repeat;
+    }
+    a:hover {
+        text-decoration: underline;
+        color: #FFF;
+    }
+}
+
+#leftNav {
+    width: 130px;
+    margin: 3px 0 0 4px;
+    float: left;
+    a {
+        display: block;
+        padding: 3px 3px 3px 6px;
+        clear: both;
+        border: 1px solid #FFF;
+        span {
+            font-weight: bold;
+        }
+    }
+    a:hover {
+        background-color: @linkBackground;
+        border-top: 1px solid @linkBorder;
+    }
+    a.selfPage {
+        float: left;
+    }
+    a.utility {
+        float: right;
+        clear: none;
+        color: grey;
+    }
+    a.utility:hover {
+        color: #36638E;
+        background-color: #EAEEF2;
+    }
+    li.divided {
+        border-top: 1px solid #CCC;
+        margin-top: 3px;
+        padding-top: 3px;
+    }
+}
+
+#main {
+    float: left;
+    width: 632px;
+    margin-left: 12px;
+    border: 2px solid #DAE1E8;
+    border-top: none;
+    h1 {
+        background: #EEE5B8 url('images/header_yellow.gif') repeat-x;
+        border-bottom: 1px solid #D7CF9E;
+        color: #000;
+        font-size: 100%;
+        padding: 2px 10px 5px;
+        span {
+            font-weight: bold;
+            color: #C8BF85;
+        }
+        span.status {
+            float: right;
+        }
+    }
+}
+
+#shortInfo {
+    margin: 10px;
+    width: 200px;
+    float: left;
+    img {
+        width: 200px;
+    }
+}
+
+#mediaNav {
+    margin: 10px 0;
+    a {
+        border-bottom: 1px solid @linkBorder;
+        display: block;
+        padding: 3px;
+    }
+    a:hover {
+        background-color: @linkBackground;
+    }
+}
+
+#ratingBar {
+    background-color: #FAFAFA;
+    border-top: 1px solid #ECECEC;
+    color: #8BA1BC;
+    height: 16px;
+    position: relative;
+    margin: 15px 0;
+    #leftSide {
+        background-color: #DAE2E8;
+        border-top: 1px solid #C0CCD9;
+        height: 16px;
+        position: absolute;
+        top: -1px;
+    }
+    p {
+        width: 100%;
+        line-height: 16px;
+        text-align: center;
+        position: absolute;
+        z-index: 2;
+    }
+}
+
+#ratingNav {
+    margin: 10px 0 10px 3px;
+    overflow: hidden;
+    a {
+        display: block;
+        padding: 3px 3px 3px 20px;
+        float: left;
+        clear: both;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    span {
+        float: right;
+        padding: 3px 0;
+    }
+    a.contacts {
+        background: url('images/edit_card.gif') no-repeat;
+    }
+    a.places {
+        background: url('images/event_icon.gif') no-repeat;
+    }
+    a.hobbies {
+        background: url('images/edit_profile.gif') no-repeat;
+    }
+    a.about {
+        background: url('images/edit_info.gif') no-repeat;
+    }
+}
+
+.section {
+    margin: 5px 0;
+    h2 {
+        color: #45688E;
+        background: #DAE2E8 url('images/flex_arrow_open.gif') no-repeat;
+        border-top: 1px solid #B1BDD6;
+        padding: 3px 8px 3px 23px;
+        font-size: 100%;
+        cursor: pointer;
+        span {
+            display: none;
+        }
+        a {
+            float: right;
+            color: #A9B8CB;
+            display: inline;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    }
+    h2.closed {
+        color: #888;
+        background: #EEE url('images/flex_arrow_shut.gif') no-repeat;
+        border-top: 1px solid #CCC;
+        span {
+            display: inline;
+        }
+        a {
+            display: none;
+        }
+    }
+}
