@@ -24,6 +24,13 @@ ul, ul li {
     list-style: none;
 }
 
+img {
+    vertical-align: bottom;
+    text-decoration: none;
+    border: none;
+    outline: none;
+}
+
 #wrapper {
     margin: 0 auto;
     width: 791px;
@@ -129,7 +136,7 @@ ul, ul li {
     margin: 10px;
     width: 200px;
     float: left;
-    img {
+    #avatar {
         width: 200px;
     }
 }
@@ -229,6 +236,77 @@ ul, ul li {
         }
         a {
             display: none;
+        }
+    }
+    div.body {
+        overflow: hidden;
+    }
+    div.info {
+        background-color: #EEE;
+        border-top: 1px solid #CCC;
+        padding: 2px 8px;
+        color: #444;
+        a:hover {
+            text-decoration: underline;
+        }
+        a.all {
+            float: right;
+        }
+    }
+    a.friend {
+        display: block;
+        width: 66px;
+        float: left;
+        text-align: center;
+        margin: 10px 0;
+        img {
+            padding-bottom: 5px;
+        }
+    }
+    a.friend:hover span {
+        text-decoration: underline;
+    }
+    div.album {
+        display: block;
+        width: 180px;
+        margin: 10px;
+        overflow: hidden;
+        img {
+            float: left;
+            clear: both;
+            padding-right: 10px;
+        }
+        h3 {
+            font-size: 100%;
+            padding-bottom: 2px;
+        }
+        p {
+            color: gray;
+        }
+        a:hover h3 {
+            text-decoration: underline;
+        }
+    }
+    div.video {
+        display: block;
+        width: 180px;
+        margin: 10px;
+        overflow: hidden;
+        img {
+            width: 180px;
+            padding-bottom: 5px;
+        }
+        h3 {
+            font-size: 100%;
+            font-weight: normal;
+            padding-bottom: 2px;
+        }
+        p {
+            color: gray;
+            font-size: 10px;
+        }
+        a:hover h3 {
+            text-decoration: underline;
         }
     }
 }

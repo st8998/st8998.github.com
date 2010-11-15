@@ -43,7 +43,7 @@
             <h1>Иван Ефремов <span class="utility">(это Вы)</span><span class="status">Онлайн</span></h1>
 
             <div id="shortInfo">
-                <img src="images/avatar.jpg">
+                <img src="images/avatar.jpg" id="avatar">
                 <ul id="mediaNav">
                     <li><a href="#">Фотографии со мной (26)</a></li>
                     <li><a href="#">Видеозаписи со мной (3)</a></li>
@@ -63,21 +63,77 @@
                 </ul>
                 <div class="section">
                     <h2>Друзья <span>(74)</span> <a href="#">Обновления</a></h2>
+                    <div class="body">
+                        <div class="info"><a href="#">Друзья (74)</a><a href="#" class="all">Все</a></div>
+                        <a href="#" class="friend"><img src="images/friend1.jpg"><span>Дмитрий Карягин</span></a>
+                        <a href="#" class="friend"><img src="images/friend2.jpg"><span>Олька Гатауллина</span></a>
+                        <a href="#" class="friend"><img src="images/friend3.jpg"><span>Михаил Новицкий</span></a>
+                        <a href="#" class="friend"><img src="images/friend4.jpg"><span>Наталья Лисицына</span></a>
+                        <a href="#" class="friend"><img src="images/friend5.jpg"><span>РАмео Игнатенко</span></a>
+                        <a href="#" class="friend"><img src="images/friend6.jpg"><span>svetlana Repalova</span></a>
+                    </div>
                 </div>
                 <div class="section">
-                    <h2 class="closed">Друзья онлайн <span>(74)</span></h2>
+                    <h2>Друзья онлайн <span>(4)</span></h2>
+                    <div class="body">
+                        <div class="info"><a href="#">Друзья онлайн (4)</a><a href="#" class="all">Все</a></div>
+                        <a href="#" class="friend"><img src="images/friend1.jpg"><span>Дмитрий Карягин</span></a>
+                        <a href="#" class="friend"><img src="images/friend2.jpg"><span>Олька Гатауллина</span></a>
+                        <a href="#" class="friend"><img src="images/friend3.jpg"><span>Михаил Новицкий</span></a>
+                        <a href="#" class="friend"><img src="images/friend4.jpg"><span>Наталья Лисицына</span></a>
+                    </div>                    
                 </div>
                 <div class="section">
                     <h2>Фотографии <span>(4 альбома)</span></h2>
+                    <div class="body">
+                        <div class="info">2 альбома из <a href="#">четырех</a><a href="#" class="all">Все</a></div>
+                        <div class="album">
+                            <a href="#">
+                                <img src="images/photo1.jpg">
+                                <h3>KFOR 2</h3>
+                            </a>
+                            <p>Создан 20 июня 2008</p>
+                        </div>
+                        <div class="album">
+                            <a href="#">
+                                <img src="images/photo2.jpg">
+                                <h3>Разное</h3>
+                            </a>
+                            <p>Обновлен 6 ноября 2010</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="section">
                     <h2>Видео <span>(4 видеозаписи)</span></h2>
+                    <div class="body">
+                        <div class="info">2 видеозаписи из <a href="#">четырех</a><a href="#" class="all">Все</a></div>
+                        <div class="video">
+                            <a href="#">
+                                <img src="images/video1.jpg">
+                                <h3>Top GEar о Лада Калина</h3>
+                            </a>
+                            <p>26 мая в 23:41 | <a href="#">0 комментариев</a></p>
+                        </div>
+                        <div class="video">
+                            <a href="#">
+                                <img src="images/video2.jpg">
+                                <h3>Вирус в компе</h3>
+                            </a>
+                            <p>3 апр в 21:54 | <a href="#">0 комментариев</a></p>
+                        </div>
+                    </div>
                 </div>
                 <div class="section">
                     <h2>Приложения <span>(2)</span></h2>
+                    <div class="body">
+                        <div class="info">2 приложения <a href="#" class="all">Все</a></div>
+                    </div>
                 </div>
                 <div class="section">
                     <h2>Группы <span>(15)</span> <a href="#">Обновления</a></h2>
+                    <div class="body">
+                        <div class="info">15 групп <a href="#" class="all">Все</a></div>
+                    </div>                    
                 </div>
             </div>
         </div>
@@ -85,8 +141,8 @@
 </div>
 <script type="text/javascript">
     $(function() {
-        $('div.section').click(function() {
-            $(this).find('h2').toggleClass('closed').end().find('.body').slideToggle('fast');
+        $('div.section h2').click(function() {
+            $(this).toggleClass('closed').siblings('.body').slideToggle('fast');
         });
     });
 </script>
