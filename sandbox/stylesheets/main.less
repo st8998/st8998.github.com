@@ -178,6 +178,7 @@ img {
 
 #ratingNav {
     margin: 10px 0 10px 3px;
+    border-right: 1px solid #ECECEC;
     overflow: hidden;
     a {
         display: block;
@@ -190,7 +191,7 @@ img {
     }
     span {
         float: right;
-        padding: 3px 0;
+        padding: 3px 5px;
     }
     a.contacts {
         background: url('../images/edit_card.gif') no-repeat;
@@ -204,6 +205,10 @@ img {
     a.about {
         background: url('../images/edit_info.gif') no-repeat;
     }
+}
+
+#shortInfo .section {
+    border-right: 1px solid #ECECEC;
 }
 
 .section {
@@ -310,3 +315,94 @@ img {
         }
     }
 }
+
+div.audio {
+    margin: 10px 0;
+    a.control {
+        float: left;
+        display: block;
+        width: 30px;
+        height: 30px;
+        background: url('../images/play.gif') no-repeat center;
+        border: none;
+        outline: none;
+    }
+    a.artist {
+        font-weight: bold;
+    }
+    a.artist:hover {
+        text-decoration: underline;
+    }
+    div.caption {
+        line-height: 30px;
+        border-bottom: 1px dashed #CCC;
+        margin: 0 10px 0 30px;
+    }
+    span.time {
+        float: right;
+        color: #777;
+    }
+    div.progress {
+        visibility: hidden;
+        height: 5px;
+        border-top: 1px solid #DAE2E8;
+        position: relative;
+        margin: 0 70px 0 30px;
+        cursor: pointer;
+        div.loaded {
+            background-color: #45688E;
+            position: absolute;
+            height: 1px;
+            margin-top: -1px;
+        }
+        div.pointer {
+            position: absolute;
+            height: 5px;
+            width: 15px;
+            background-color: #45688E;
+            opacity: .6;
+            margin-top: -1px;
+        }
+    }
+    div.volume {
+        visibility: hidden;
+        position: relative;
+        border-top: 1px solid #45688E;         
+        height: 5px;
+        margin: -6px 10px 0 0;
+        float: right;
+        width: 50px;
+        cursor: pointer;
+        div.pointer {
+            position: absolute;
+            width: 10px;
+            height: 5px;
+            background-color: #45688E;
+            margin-top: -1px;
+        }
+    }
+}
+
+div.audio.active, div.audio.paused {
+    div.caption {
+        border-color: #FFF;
+    }
+}
+div.audio.active a.control {
+    background: url('../images/pause.gif') no-repeat center;
+}
+div.audio.active div.progress, div.audio.active div.volume,
+div.audio.paused div.progress, div.audio.paused div.volume{
+    visibility: visible;
+}
+
+#profile {    
+    float: left;
+    width: 402px;
+    margin: 10px 0;
+}
+
+
+/*loaded: #45688E;*/
+/*unloaded: #DAE2E8;*/
+/*position: #B1BDD6;*/
