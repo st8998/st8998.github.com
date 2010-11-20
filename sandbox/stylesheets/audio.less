@@ -1,0 +1,82 @@
+div.audio {    
+    div.button {
+        float: left;
+        margin: 6px 3px;
+    }
+    div.pause {
+        display: none;
+    }
+    a.artist {
+        font-weight: bold;
+    }
+    div.caption {
+        line-height: 30px;
+        border-bottom: 1px dashed @bMain;
+        margin: 0 10px 0 30px;
+    }
+    span.time {
+        float: right;
+        color: @tLabel;
+    }
+    div.progress {
+        visibility: hidden;
+        height: 5px;
+        border-top: 1px solid @bGray;
+        position: relative;
+        margin: 0 70px 0 30px;
+        cursor: pointer;
+        div.loaded {
+            background-color: @bLight;
+            position: absolute;
+            height: 1px;
+            margin-top: -1px;
+            width: 40%;
+        }
+        div.pointer {
+            position: absolute;
+            height: 5px;
+            width: 15px;
+            background-color: @bDark;
+            opacity: .5;
+            margin-top: -1px;
+        }
+    }
+    div.volume {
+        visibility: hidden;
+        position: relative;
+        border-top: 1px solid @bLight;
+        height: 5px;
+        margin: -6px 10px 0 0;
+        float: right;
+        width: 50px;
+        cursor: pointer;
+        div.pointer {
+            position: absolute;
+            width: 10px;
+            height: 5px;
+            background-color: @bDark;
+            opacity: .7;
+            margin-top: -1px;
+        }
+    }
+    .download {
+        float: right;
+        margin: 6px  0 6px 10px;
+    }
+}
+
+div.audio.active, div.audio.paused {
+    div.caption {
+        border-color: #FFF;
+    }
+}
+div.audio.active div.pause {
+    display: block;
+}
+div.audio.active div.play {
+    display: none;    
+}
+div.audio.active div.progress, div.audio.active div.volume,
+div.audio.paused div.progress, div.audio.paused div.volume{
+    visibility: visible;
+}

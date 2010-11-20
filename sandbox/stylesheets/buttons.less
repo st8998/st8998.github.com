@@ -1,0 +1,38 @@
+.buttonContainer {
+    text-align: center;
+}
+
+.button {
+    background-color: @bgDark;
+    border: 1px solid @bDark;
+    color: @tMainLight;
+    padding: 3px 10px;
+    display: inline;
+    font-weight: bold;
+    -webkit-user-select: none;
+    cursor: pointer;
+}
+
+.iconButton {
+    font: 12px/18px 'IconsFont';
+    font-size: 130%;
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+    line-height: 18px;
+    text-align: center;
+    padding: 0;    
+}
+
+.button:hover {
+    background-color: @bgButtonHover;        
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.button:active {
+    background-color: @bgLight;
+    border: 1px solid @bLight;
+    color: @tMain;
+    cursor: pointer;
+}

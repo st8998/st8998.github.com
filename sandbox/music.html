@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Some HTML CSS Experiments</title>
+    <link rel="stylesheet/less" href="stylesheets/main.less" type="text/css"/>
+    <script src="../javascripts/less-1.0.36.min.js" type="text/javascript"></script>
+    <script src="../javascripts/jquery.js" type="text/javascript"></script>
+    <script src="../javascripts/jquery.tmpl.js" type="text/javascript"></script>
+    <script src="javascripts/prostopleerpull.js" type="text/javascript"></script>
+</head>
+
+<script type="text/x-jquery-tmpl" id="trackTemplate">
+    <div class="audio" data-audio-url="${url}" draggable="true">
+        <div class="button iconButton play">1</div>
+        <div class="button iconButton pause">2</div>
+        <a class="button iconButton download" href="${url}">S</a>
+
+        <div class="caption"><a href="javascript: void(0);" class="artist">${artist}</a> - ${title}<span class="time">${time}</span>
+        </div>
+        <div class="progress">
+            <div class="loaded"></div>
+            <div class="pointer"></div>
+        </div>
+        <div class="volume">
+            <div class="pointer"></div>
+        </div>
+    </div>
+</script>
+
+<body>
+<div id="headerWrapper">
+    <div id="header">
+        <h1>Sandbox</h1>
+    </div>
+</div>
+<div id="mainNavWrapper">
+    <div id="mainNav">
+        <ul>
+            <li class="active"><a href="music.html">Music</a></li>
+        </ul>
+    </div>
+</div>
+<div id="mainWrapper">
+    <div id="playlist">
+        <form id="searchAudio">
+            <input type="text" class="search">
+            <button class="button">Search</button>
+        </form>
+        <div id="searchResults"></div>
+        <div class="download" style="display: none;"></div>
+        <div class="buttonContainer"><div id="getMore" class="button" style="display: none">Get More</div></div>
+    </div>
+    <div id="utility"></div>
+</div>
+
+<script type="text/javascript">
+    $(function() {
+        var $trackTemplate = $('#trackTemplate');
+        var $tracksContainer = $('#searchResults');
+
+        var pull = new ProstopleerPull();
+
+        var $searchForm = $('#searchAudio');
+        var $searchResults = $('#searchResults');
+        var $getMoreButton = $('#getMore');
+        var $loadIndicator = $('.download');
+
+        $searchForm.submit(function() {
+            $searchResults.find('.audio:not(.active,.paused)').remove();
+            getTracks();
+            return false;
+        });
+
+        $getMoreButton.click(getTracks);
+
+        function getTracks() {
+            var searchTerm = $searchForm.find('input').val();
+            if (!!searchTerm) {
+                $loadIndicator.show();
+                pull.get(searchTerm, 10, function(tracks) {
+                    $trackTemplate.tmpl(tracks).appendTo($tracksContainer);
+                    $getMoreButton.show();
+                    $loadIndicator.hide();
+                });
+            }
+        }
+
+        $.get('http://prostopleer.com');
+
+    });
+</script>
+</body>
+</html>
