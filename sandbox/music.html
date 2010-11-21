@@ -89,10 +89,12 @@
             e.originalEvent.dataTransfer.effectAllowed = 'audioCopy';
             e.originalEvent.dataTransfer.setData('Text', JSON.stringify($(this).data('tmplItem').data));
             $(this).before($dropZone.show()).addClass('dragging');
+            $searchResults.append('<div class="audio">');
         });
         $searchResults.delegate('.audio', 'dragend', function(e) {
             $(this).removeClass('dragging');
             $dropZone.hide();
+            $searchResults.children().last().remove();
         });
 
         $searchResults.delegate('.audio', 'dragover', function(e) {
