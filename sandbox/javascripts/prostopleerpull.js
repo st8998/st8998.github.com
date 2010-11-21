@@ -26,7 +26,7 @@ function ProstopleerPull() {
             this.request.abort();
         }
         this.requestInProgress = true;
-        this.request = $.getJSON("http://localhost:4567/pp/search?callback=?",
+        this.request = $.getJSON("http://gateway.heroku.com/pp/search?callback=?",
                 {q: this.currentSearchTerm, page: this.currentPage, ref: getRef()},
                 $.proxy(function(tracks) {
                     pull = pull.concat(tracks);
