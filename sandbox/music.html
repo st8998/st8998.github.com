@@ -12,9 +12,9 @@
 
 <script type="text/x-jquery-tmpl" id="trackTemplate">
     <div class="audio" data-audio-url="${url}" draggable="true">
-        <div class="button iconButton play">1</div>
-        <div class="button iconButton pause">2</div>
-        <a class="button iconButton download" href="${url}">S</a>
+        <div class="button iconButton play" disabled>1</div>
+        <div class="button iconButton pause" disabled>2</div>
+        <a class="button iconButton download" href="${url}" disabled>S</a>
 
         <div class="caption"><a href="javascript: void(0);" class="artist">${artist}</a> - ${title}<span class="time">${time}</span>
         </div>
@@ -54,102 +54,24 @@
             <button class="button">Search</button>
         </form>
         <div id="searchResults">
-
-
-        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
-            <div class="button iconButton play">1</div>
-            <div class="button iconButton pause">2</div>
-            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
-
-            <div class="caption"><a href="javascript: void(0);" class="artist">Ария и Slot</a> - Улица
-                роз<span class="time">04:17</span></div>
+           <div id="dropZone" style="display: none;"></div>
         </div>
-        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
-            <div class="button iconButton play">1</div>
-            <div class="button iconButton pause">2</div>
-            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
-
-            <div class="caption"><a href="javascript: void(0);" class="artist">Slot</a> - Над
-                пропастью
-                во лжи<span class="time">03:27</span></div>
-        </div>
-        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
-            <div class="button iconButton play">1</div>
-            <div class="button iconButton pause">2</div>
-            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
-
-            <div class="caption"><a href="javascript: void(0);" class="artist">Бони
-                Нем SLOT</a> - Амадеос<span class="time">04:11</span></div>
-        </div>
-        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
-            <div class="button iconButton play">1</div>
-            <div class="button iconButton pause">2</div>
-            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
-
-            <div class="caption"><a href="javascript: void(0);" class="artist">Бони
-                Нем SLOT</a> - Амадеус
-                (Falco cover)<span class="time">04:11</span></div>
-        </div>
-        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
-            <div class="button iconButton play">1</div>
-            <div class="button iconButton pause">2</div>
-            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
-
-            <div class="caption"><a href="javascript: void(0);" class="artist">013 Slot</a> - Dve Voyni (Ibiza
-                Remix)<span class="time">03:48</span></div>
-        </div>
-        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
-            <div class="button iconButton play">1</div>
-            <div class="button iconButton pause">2</div>
-            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
-
-            <div class="caption"><a href="javascript: void(0);" class="artist">SLOT
-                MaxComa</a> - Slot - Две
-                войны (remix MaxCom<span class="time">03:44</span></div>
-        </div>
-        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
-            <div class="button iconButton play">1</div>
-            <div class="button iconButton pause">2</div>
-            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
-
-            <div class="caption"><a href="javascript: void(0);" class="artist">Slot</a> - Доска (Live
-                brakebeat remix by rone-d)<span class="time">04:28</span></div>
-        </div>
-        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
-            <div class="button iconButton play">1</div>
-            <div class="button iconButton pause">2</div>
-            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
-
-            <div class="caption"><a href="javascript: void(0);" class="artist">13 Slot</a> - klon<span class="time">03:37</span>
-            </div>
-        </div>
-        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
-            <div class="button iconButton play">1</div>
-            <div class="button iconButton pause">2</div>
-            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
-
-            <div class="caption"><a href="javascript: void(0);" class="artist">Slot</a> - Одни<span
-                    class="time">03:10</span></div>
-        </div>
-        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
-            <div class="button iconButton play">1</div>
-            <div class="button iconButton pause">2</div>
-            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
-
-            <div class="caption"><a href="javascript: void(0);" class="artist">Слот</a> - 2 Войны (By
-                SLOT)<span class="time">04:04</span></div>
+        <div class="download" style="display: none;"></div>
+        <div class="buttonContainer">
+            <div id="getMore" class="button" style="display: none">Get More</div>
         </div>
     </div>
-    <div class="download" style="display: none;"></div>
-    <div class="buttonContainer">
-        <div id="getMore" class="button" style="display: none">Get More</div>
-    </div>
-</div>
-<div id="utility"></div>
+    <div id="utility"></div>
 </div>
 
 <script type="text/javascript">
     $(function() {
+
+        $('.button[disabled]').live('click', function(e) {
+            e.stopPropagation();
+            return false;
+        });
+
         var $trackTemplate = $('#trackTemplate');
         var $tracksContainer = $('#searchResults');
 
@@ -159,6 +81,41 @@
         var $searchResults = $('#searchResults');
         var $getMoreButton = $('#getMore');
         var $loadIndicator = $('.download');
+
+        var $dropZone = $('#dropZone');
+
+        // drag and drop logic
+        $searchResults.delegate('.audio', 'dragstart', function(e) {
+            e.originalEvent.dataTransfer.effectAllowed = 'audioCopy';
+            e.originalEvent.dataTransfer.setData('Text', JSON.stringify($(this).data('tmplItem').data));
+            $(this).before($dropZone.show()).addClass('dragging');
+        });
+        $searchResults.delegate('.audio', 'dragend', function(e) {
+            $(this).removeClass('dragging');
+            $dropZone.hide();
+        });
+
+        $searchResults.delegate('.audio', 'dragover', function(e) {
+            $(this).before($dropZone.show());
+        });
+
+        $dropZone.bind({
+            'dragover': function(e) {
+                e.preventDefault();
+                return false;
+            },
+            'drop': function(e) {
+                var $local = $searchResults.find('.dragging');
+                if ($local.length) {
+                    $(this).before($local.removeClass('dragging'));
+                } else {
+                    $(this).before($trackTemplate.tmpl(JSON.parse(e.originalEvent.dataTransfer.getData('Text'))));
+                }
+                $dropZone.hide();
+            }
+        });
+
+        // search logic
 
         $searchForm.submit(function() {
             $searchResults.find('.audio:not(.active,.paused)').remove();
@@ -173,7 +130,6 @@
             if (!!searchTerm) {
                 $loadIndicator.show();
                 pull.get(searchTerm, 10, function(tracks) {
-                    console.log(tracks);
                     $trackTemplate.tmpl(tracks).appendTo($tracksContainer);
                     $getMoreButton.show();
                     $loadIndicator.hide();
@@ -205,19 +161,21 @@
         });
 
         $searchResults.delegate('.audio .play, .audio .pause', 'click', function() {
-            var $container = $(this).closest('.audio');
-            if ($container.hasClass('paused')) {
-                audio.play();
-                $container.removeClass('paused').addClass('active');
-            } else if ($container.hasClass('active')) {
-                audio.pause();
-                $container.addClass('paused').removeClass('active');
-            } else {
-                $container.append($player);
-                audio.setAttribute('src', $container.data('audio-url'));
-                audio.load();
-                audio.play();
-                $container.addClass('active').siblings('.active,.paused').removeClass('active paused');
+            if ($(this).not('[disabled]').length) {
+                var $container = $(this).closest('.audio');
+                if ($container.hasClass('paused')) {
+                    audio.play();
+                    $container.removeClass('paused').addClass('active');
+                } else if ($container.hasClass('active')) {
+                    audio.pause();
+                    $container.addClass('paused').removeClass('active');
+                } else {
+                    $container.append($player);
+                    audio.setAttribute('src', $container.data('audio-url'));
+                    audio.load();
+                    audio.play();
+                    $container.addClass('active').siblings('.active,.paused').removeClass('active paused');
+                }
             }
         });
 
