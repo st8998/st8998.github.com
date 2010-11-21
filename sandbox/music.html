@@ -18,6 +18,12 @@
 
         <div class="caption"><a href="javascript: void(0);" class="artist">${artist}</a> - ${title}<span class="time">${time}</span>
         </div>
+    </div>
+</script>
+
+<script type="text/x-jquery-tmpl" id="playerTemplate">
+    <div id="player">
+        <audio></audio>
         <div class="progress">
             <div class="loaded"></div>
             <div class="pointer"></div>
@@ -47,11 +53,99 @@
             <input type="text" class="search">
             <button class="button">Search</button>
         </form>
-        <div id="searchResults"></div>
-        <div class="download" style="display: none;"></div>
-        <div class="buttonContainer"><div id="getMore" class="button" style="display: none">Get More</div></div>
+        <div id="searchResults">
+
+
+        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
+            <div class="button iconButton play">1</div>
+            <div class="button iconButton pause">2</div>
+            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
+
+            <div class="caption"><a href="javascript: void(0);" class="artist">Ария и Slot</a> - Улица
+                роз<span class="time">04:17</span></div>
+        </div>
+        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
+            <div class="button iconButton play">1</div>
+            <div class="button iconButton pause">2</div>
+            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
+
+            <div class="caption"><a href="javascript: void(0);" class="artist">Slot</a> - Над
+                пропастью
+                во лжи<span class="time">03:27</span></div>
+        </div>
+        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
+            <div class="button iconButton play">1</div>
+            <div class="button iconButton pause">2</div>
+            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
+
+            <div class="caption"><a href="javascript: void(0);" class="artist">Бони
+                Нем SLOT</a> - Амадеос<span class="time">04:11</span></div>
+        </div>
+        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
+            <div class="button iconButton play">1</div>
+            <div class="button iconButton pause">2</div>
+            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
+
+            <div class="caption"><a href="javascript: void(0);" class="artist">Бони
+                Нем SLOT</a> - Амадеус
+                (Falco cover)<span class="time">04:11</span></div>
+        </div>
+        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
+            <div class="button iconButton play">1</div>
+            <div class="button iconButton pause">2</div>
+            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
+
+            <div class="caption"><a href="javascript: void(0);" class="artist">013 Slot</a> - Dve Voyni (Ibiza
+                Remix)<span class="time">03:48</span></div>
+        </div>
+        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
+            <div class="button iconButton play">1</div>
+            <div class="button iconButton pause">2</div>
+            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
+
+            <div class="caption"><a href="javascript: void(0);" class="artist">SLOT
+                MaxComa</a> - Slot - Две
+                войны (remix MaxCom<span class="time">03:44</span></div>
+        </div>
+        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
+            <div class="button iconButton play">1</div>
+            <div class="button iconButton pause">2</div>
+            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
+
+            <div class="caption"><a href="javascript: void(0);" class="artist">Slot</a> - Доска (Live
+                brakebeat remix by rone-d)<span class="time">04:28</span></div>
+        </div>
+        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
+            <div class="button iconButton play">1</div>
+            <div class="button iconButton pause">2</div>
+            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
+
+            <div class="caption"><a href="javascript: void(0);" class="artist">13 Slot</a> - klon<span class="time">03:37</span>
+            </div>
+        </div>
+        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
+            <div class="button iconButton play">1</div>
+            <div class="button iconButton pause">2</div>
+            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
+
+            <div class="caption"><a href="javascript: void(0);" class="artist">Slot</a> - Одни<span
+                    class="time">03:10</span></div>
+        </div>
+        <div class="audio" data-audio-url="http://prostopleer.com/download/8eve3egzj" draggable="true">
+            <div class="button iconButton play">1</div>
+            <div class="button iconButton pause">2</div>
+            <a class="button iconButton download" href="http://prostopleer.com/download/8eve3egzj">S</a>
+
+            <div class="caption"><a href="javascript: void(0);" class="artist">Слот</a> - 2 Войны (By
+                SLOT)<span class="time">04:04</span></div>
+        </div>
     </div>
-    <div id="utility"></div>
+    <div class="download" style="display: none;"></div>
+    <div class="buttonContainer">
+        <div id="getMore" class="button" style="display: none">Get More</div>
+    </div>
+</div>
+<div id="utility"></div>
 </div>
 
 <script type="text/javascript">
@@ -86,7 +180,45 @@
             }
         }
 
-        $.get('http://prostopleer.com');
+        var $player = $('#playerTemplate').tmpl();
+        var $audio = $player.find('audio');
+        var audio = $audio.get(0);
+
+        var $progress = $player.find('.progress');
+        var $loaded = $progress.find('.loaded');
+        var $pointer = $progress.find('.pointer');
+
+        $audio.bind({
+            'progress': function() {
+                console.log(this.seekable && this.seekable.length ? this.seekable.end() : 0);
+                var loaded = 1 / (this.duration || 1) * (this.seekable && this.seekable.length ? this.seekable.end() : 0);
+                $loaded.width(Math.round($progress.width() * loaded));
+            },
+            'timeupdate': function() {
+                var pos = audio.currentTime / audio.duration;
+                $pointer.css('left', Math.round(($progress.width() - 15) * pos) + 'px')
+            },
+            'ended': function() {
+                $container.next().triggerHandler('click.player');
+            }
+        });
+
+        $searchResults.delegate('.audio .play, .audio .pause', 'click', function() {
+            var $container = $(this).closest('.audio');
+            if ($container.hasClass('paused')) {
+                audio.play();
+                $container.removeClass('paused').addClass('active');
+            } else if ($container.hasClass('active')) {
+                audio.pause();
+                $container.addClass('paused').removeClass('active');
+            } else {
+                $container.append($player);
+                audio.setAttribute('src', $container.data('audio-url'));
+                audio.load();
+                audio.play();
+                $container.addClass('active').siblings('.active,.paused').removeClass('active paused');
+            }
+        });
 
     });
 </script>

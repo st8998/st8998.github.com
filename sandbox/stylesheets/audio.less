@@ -1,4 +1,9 @@
-div.audio {    
+div.audio {
+    clear: all;
+    overflow: hidden;
+    audio {
+        position: absolute;
+    }
     div.button {
         float: left;
         margin: 6px 3px;
@@ -12,7 +17,7 @@ div.audio {
     div.caption {
         line-height: 30px;
         border-bottom: 1px dashed @bMain;
-        margin: 0 10px 0 30px;
+        margin: 0 10px 6px 30px;
     }
     span.time {
         float: right;
@@ -30,7 +35,7 @@ div.audio {
             position: absolute;
             height: 1px;
             margin-top: -1px;
-            width: 40%;
+            width: 0;
         }
         div.pointer {
             position: absolute;
@@ -68,6 +73,7 @@ div.audio {
 div.audio.active, div.audio.paused {
     div.caption {
         border-color: #FFF;
+        margin-bottom: 0px;
     }
 }
 div.audio.active div.pause {
