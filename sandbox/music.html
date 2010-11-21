@@ -173,6 +173,7 @@
             if (!!searchTerm) {
                 $loadIndicator.show();
                 pull.get(searchTerm, 10, function(tracks) {
+                    console.log(tracks);
                     $trackTemplate.tmpl(tracks).appendTo($tracksContainer);
                     $getMoreButton.show();
                     $loadIndicator.hide();
@@ -199,7 +200,7 @@
                 $pointer.css('left', Math.round(($progress.width() - 15) * pos) + 'px')
             },
             'ended': function() {
-                $container.next().triggerHandler('click.player');
+//                $container.next().triggerHandler('click.player');
             }
         });
 
