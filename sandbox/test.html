@@ -23,10 +23,18 @@
         }
     }
 
-    VK.Auth.getLoginStatus(function(response) {
-
-    });
+    VK.Auth.getLoginStatus(authInfo);
     VK.UI.button('login_button');
 </script>
+<script type="text/javascript">
+    $(function() {
+        $('button').click(function() {
+            VK.Api.call('audio.get', {}, function(r) {
+                 console.log(r);
+            });
+        });
+    });
+</script>
+<button>Get My Music</button>
 </body>
 </html>
