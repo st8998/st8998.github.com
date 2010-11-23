@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Some HTML CSS Experiments</title>
+    <link rel="stylesheet/less" href="stylesheets/main.less" type="text/css"/>
+    <script src="../javascripts/less-1.0.36.min.js" type="text/javascript"></script>
+    <script src="../javascripts/jquery.js" type="text/javascript"></script>
+    <script src="../javascripts/underscore.js" type="text/javascript"></script>
+    <script src="javascripts/json2.js" type="text/javascript"></script>
+    <script src="javascripts/backbone.js" type="text/javascript"></script>
+</head>
+
+<body>
+<script type="text/javascript">
+    $(function() {
+        var Workspace = Backbone.Controller.extend({
+            routes: {
+                'joppa': 'joppa',
+                'drill': 'drill'
+            },
+            joppa: function() {
+                console.log('joppa');
+                $('body').html('<h1>JOPPA</h1>');
+                $('body').append('<a href="#drill">DRILL IT NOW</a>');
+            },
+            drill: function() {
+                $('body').html('<h1>YOUR JOPPA DRILLED SUCCESSFULLY</h1>');
+                $('body').append('<a href="#joppa">TRY TO HEAL IT</a>');
+            }
+        });
+        new Workspace();
+        Backbone.history.start();
+    });
+</script>
+</body>
+</html>
