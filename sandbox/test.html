@@ -25,6 +25,7 @@
             background-color: #8aa1ad;
             background-image: -webkit-gradient(linear, left top, left bottom, from(#8aa1ad), to(#314A5E));
             border: 1px solid #314A5E;
+            cursor: pointer;
         }
         .button:hover {
             background-color: #c94120;
@@ -34,6 +35,13 @@
         .button:active {
             background-color: #ad3023;
             background-image: none;
+        }
+        .button[disabled] {
+            cursor: default;
+            background-color: #93ACB6;
+            color: #d9e7ed;
+            background-image: none;
+            border-color: #8aa1ad;
         }
         body {
             background-color: #cad9df;
@@ -66,12 +74,19 @@
                  console.log(r);
             });
         });
-        $('body').html('<div style="width: 100px; margin: 100px auto;"><a href="#" class="button">more</a></div>')
+//        $('body').html('<div style="width: 100px; margin: 100px auto;"><a href="#" class="button">more</a></div>')
     });
 </script>
-<button>Get My Music</button>
+
+<!--<button>Get My Music</button>-->
 <br />
+<div style="width: 200px; margin: 0 auto;">
 <a href="#" class="button">more</a>
+<br/>
+<br/>
+<div class="button" disabled>div button</div>
+</div>
+
 
 </body>
 </html>
