@@ -6,6 +6,39 @@
     <script src="../javascripts/jquery.js" type="text/javascript"></script>
     <script src="../javascripts/jquery.tmpl.js" type="text/javascript"></script>
     <script src="http://vkontakte.ru/js/api/openapi.js" type="text/javascript"></script>
+    <style>
+        @font-face {
+            font-family: 'bebasneue';
+            src: local('☺'), url('images/bebasneue-webfont.woff') format('woff');
+        }
+        .button {
+            text-transform: capitalize;
+            font-family: 'bebasneue';
+            text-decoration: none;
+            letter-spacing: -1px;
+            display: inline-block;
+            font-size: 200%;
+            line-height: 70%;
+            color: #FFF;
+            padding: 17px 20px 2px;
+            border-radius: 5px;
+            background-color: #8aa1ad;
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#8aa1ad), to(#314A5E));
+            border: 1px solid #314A5E;
+        }
+        .button:hover {
+            background-color: #c94120;
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#c94120), to(#ad3023));
+            border-color: #9E3C47;
+        }
+        .button:active {
+            background-color: #ad3023;
+            background-image: none;
+        }
+        body {
+            background-color: #cad9df;
+        }
+    </style>
 </head>
 <body>
 <div id="login_button" onclick="VK.Auth.login(authInfo);"></div>
@@ -33,8 +66,12 @@
                  console.log(r);
             });
         });
+        $('body').html('<div style="width: 100px; margin: 100px auto;"><a href="#" class="button">more</a></div>')
     });
 </script>
 <button>Get My Music</button>
+<br />
+<a href="#" class="button">more</a>
+
 </body>
 </html>
