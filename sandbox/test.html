@@ -25,7 +25,7 @@
             letter-spacing: -0.05em;
             display: inline-block;
             font-size: 200%;
-            line-height: 100%;
+            line-height: 1em;
             color: #FFF;
             padding: 0.1em 0.8em 0.2em;
             -moz-border-radius: 5px;
@@ -53,6 +53,11 @@
             color: #d9e7ed;
             background-image: none;
             border-color: #8aa1ad;
+        }
+        .button img {
+            vertical-align: middle;
+            position: relative;
+            left: -0.3em;
         }
     </style>
 </head>
@@ -92,7 +97,16 @@
 <a href="#" class="button">more</a>
 <br/>
 <br/>
-<div class="button" disabled>div button</div>
+<div class="button" disabled>disabled</div>
+    <br/>
+    <br/>
+<div class="button"><img src="images/edit_card.gif"/><span>with icon</span></div>
+    <br/>
+    <br/>
+<div class="button" style="font-size: 150%">small</div>
+    <br/>
+    <br/>
+<div class="button" style="font-size: 300%">giant</div>
 </div>
 
 
