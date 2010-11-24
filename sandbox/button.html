@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Some HTML CSS Experiments</title>
-    <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&subset=latin' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono&subset=latin' rel='stylesheet' type='text/css'>
     <script src="../javascripts/jquery.js" type="text/javascript"></script>
     <script src="../javascripts/jquery.tmpl.js" type="text/javascript"></script>
-    <script src="http://vkontakte.ru/js/api/openapi.js" type="text/javascript"></script>
     <style>
         body {
             background-color: #cad9df;
             font-size: 12px;
         }
+
         @font-face {
             font-family: 'Bebas';
             src: local('@'), url('images/BEBAS___.ttf') format('truetype'), url('images/bebas___-webfont.svg#webfont4YQzfMDi') format('svg');
         }
         .button {
-            /*text-transform: uppercase;*/
+            text-transform: uppercase;
             font-family: 'Bebas';
             font-weight: bold;
             text-decoration: none;
@@ -37,16 +35,19 @@
             border: 1px solid #314A5E;
             cursor: pointer;
         }
+
         .button:hover {
             background-color: #c94120;
             background-image: -webkit-gradient(linear, left top, left bottom, from(#c94120), to(#ad3023));
             background-image: -moz-linear-gradient(top, #c94120, #ad3023);
             border-color: #9E3C47;
         }
+
         .button:active {
             background-color: #ad3023;
             background-image: none;
         }
+
         .button[disabled] {
             cursor: default;
             background-color: #93ACB6;
@@ -54,61 +55,43 @@
             background-image: none;
             border-color: #8aa1ad;
         }
+
         .button img {
             vertical-align: middle;
             position: relative;
             left: -0.3em;
         }
+        .button {
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
-<div id="login_button" onclick="VK.Auth.login(authInfo);"></div>
-<div id="records"></div>
-
-<script type="text/javascript">
-    VK.init({
-        apiId: 2023842
-    });
-    function authInfo(response) {
-        if (response.session) {
-            alert('user: ' + response.session.mid);
-        } else {
-            alert('not auth');
-        }
-    }
-
-//    VK.Auth.getLoginStatus(authInfo);
-//    VK.UI.button('login_button');
-</script>
 <script type="text/javascript">
     $(function() {
-        $('button').click(function() {
-            VK.Api.call('audio.get', {}, function(r) {
-                 console.log(r);
-            });
+        $('.button[disabled]').click(function(e) {
+            console.log('DISABLED');
+            e.stopImmediatePropagation();
+            return false;
         });
-//        $('body').html('<div style="width: 100px; margin: 100px auto;"><a href="#" class="button">more</a></div>')
+
+        $('.button').live('click', function() {
+            console.log('LIVE HANDLER FIRE');
+        });
+        $('.button').click(function() {
+            console.log('CLICK HANDLER FIRE');
+        });
     });
 </script>
 
-<!--<button>Get My Music</button>-->
-<br />
-<div style="width: 300px; margin: 0 auto;">
-<a href="#" class="button">more</a>
-<br/>
-<br/>
-<div class="button" disabled>disabled</div>
-    <br/>
-    <br/>
-<div class="button"><img src="images/edit_card.gif"/><span>with icon</span></div>
-    <br/>
-    <br/>
-<div class="button" style="font-size: 150%">small</div>
-    <br/>
-    <br/>
-<div class="button" style="font-size: 300%">giant</div>
-</div>
+<div style="width: 200px; margin: 0 auto;">
+    <a href="#" class="button">more</a>
 
+    <div class="button" disabled>disabled</div>
+    <div class="button"><img src="images/edit_card.gif"/>with icon</div>
+    <div class="button" style="font-size: 150%">small</div>
+    <div class="button" style="font-size: 300%">giant</div>
+</div>
 
 </body>
 </html>
