@@ -1,0 +1,96 @@
+
+.button {
+    text-transform: uppercase;
+    text-align: center;
+    font-family: 'BebasRegular', arial, sans;
+    text-decoration: none;
+    letter-spacing: 0;
+    word-spacing: .2em;
+    display: inline-block;
+    font-size: 150%;
+    line-height: 1.2em;
+    color: #FFF;
+    padding: 0.1em 0.8em 0.2em;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #8aa1ad;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#8aa1ad), to(#314A5E));
+    background-image: -moz-linear-gradient(top, #8aa1ad, #314A5E);
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#8aa1ad', endColorstr = '#314A5E');*/
+    border: 1px solid #314A5E;
+    cursor: pointer;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+    text-shadow: #314A5E 1px 1px 1px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+.button:hover {
+    background-color: #c94120;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#c94120), to(#ad3023));
+    background-image: -moz-linear-gradient(top, #c94120, #ad3023);
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#c94120', endColorstr = '#ad3023');*/
+    border-color: #9E3C47;
+    text-shadow: #9E3C47 1px 1px 1px;
+}
+
+.button:active {
+    background-color: #ad3023;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ad3023), to(#c94120));
+    background-image: -moz-linear-gradient(top, #ad3023, #c94120);
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ad3023', endColorstr = '#c94120');*/
+    position: relative;
+    top: 1px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .2);
+    -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .2);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .2);
+    text-shadow: #9E3C47 -1px -1px 1px;
+}
+
+.button.disabled {
+    cursor: default;
+    background-color: #93ACB6;
+    color: #d9e7ed;
+    background-image: none;
+    border-color: #8aa1ad;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    filter: none;
+    box-shadow: none;
+    text-shadow: none;
+    top: 0;
+}
+
+.button img {
+    position: relative;
+    left: -0.3em;
+    width: 0.7em;
+    height: 0.7em;
+    padding: 0.1em 0;
+}
+
+.button.disabled img {
+    opacity: .5;
+}
+
+.button.icon-only {
+    width: 1.2em;
+    padding: 0;
+    letter-spacing: 0;
+    word-spacing: 0;
+}
+
+.button.icon-only img {
+    left: 0;
+    top: -0.05em;
+    width: 0.7em;
+    height: 0.7em;
+}
+
+.icon-font {
+    text-transform: none;
+    font-family: 'Guifxv2TransportsRegular', arial, sans;
+}

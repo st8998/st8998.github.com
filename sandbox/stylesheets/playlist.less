@@ -1,0 +1,57 @@
+body {
+    width: 600px;
+}
+p.advice {
+    text-align: center;
+    margin: 0;
+}
+
+p.advice:before {
+    content: '*';
+    margin-right: 5px;
+}
+ul.playlist {
+    margin: 0 10px;
+    li {
+        overflow: hidden;
+        display: table;
+        width: 100%;
+    }
+    .button {        
+        display: table-cell;        
+    }
+    .pause {
+        display: none;
+    }
+    .info {        
+        display: table-cell;
+    }
+    .artist {
+        font-weight: bold;
+        text-decoration: none;        
+        &:hover {
+            color: #ad3023;
+        }
+    }
+    .title:before {
+        content: '-';
+        padding-right: 4px;
+    }
+    .time {
+        color: #7C94A7;
+        float: right;
+        display: block;
+    }
+    .track {
+        display: table-row;
+    }
+    .player {
+        border-top: 1px solid #000;
+        display: table-cell;
+        height: 20px;
+        background-color: red;
+    }
+    .player:before {        
+        display: table-cell;
+    }
+}
