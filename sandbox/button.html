@@ -17,7 +17,8 @@
         }
         .button {
             text-transform: uppercase;
-            font-family: 'Bebas';
+            text-align: center;
+            font-family: 'Bebas', arial, sans;
             font-weight: bold;
             text-decoration: none;
             letter-spacing: -0.05em;
@@ -32,34 +33,67 @@
             background-color: #8aa1ad;
             background-image: -webkit-gradient(linear, left top, left bottom, from(#8aa1ad), to(#314A5E));
             background-image: -moz-linear-gradient(top, #8aa1ad, #314A5E);
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#8aa1ad', endColorstr='#314A5E');
             border: 1px solid #314A5E;
             cursor: pointer;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.5);
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+            box-shadow: 0 1px 2px rgba(0,0,0,.2);
+            text-shadow: #314A5E 1px 1px 1px;
+            -webkit-user-select:none;
+            -moz-user-select:none;
         }
 
         .button:hover {
             background-color: #c94120;
             background-image: -webkit-gradient(linear, left top, left bottom, from(#c94120), to(#ad3023));
             background-image: -moz-linear-gradient(top, #c94120, #ad3023);
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#c94120', endColorstr='#ad3023');
             border-color: #9E3C47;
+            text-shadow: #9E3C47 1px 1px 1px;
         }
 
         .button:active {
             background-color: #ad3023;
-            background-image: none;
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#ad3023), to(#c94120));
+            background-image: -moz-linear-gradient(top, #ad3023, #c94120);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ad3023', endColorstr='#c94120');
+            position: relative;
+            top: 1px;
+            -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
+            -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
+            box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
+            text-shadow: #9E3C47 -1px -1px 1px;
         }
 
-        .button[disabled] {
+        .button.disabled {
             cursor: default;
             background-color: #93ACB6;
             color: #d9e7ed;
             background-image: none;
             border-color: #8aa1ad;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            filter: none;
+            box-shadow: none;
+            text-shadow: none;
+            top: 0;
         }
 
         .button img {
             vertical-align: middle;
             position: relative;
             left: -0.3em;
+        }
+        .button.icon-only {
+            width: 1em;
+            padding: 0;
+        }
+        .button.icon-only img {
+            left: 0;
+            top: -0.05em;
+            width: 0.7em;
+            height: 0.7em;
         }
         .button {
             margin: 10px 0;
@@ -85,12 +119,16 @@
 </script>
 
 <div style="width: 200px; margin: 0 auto;">
-    <a href="#" class="button">more</a>
+    <a href="#" class="button">more</a>  <br/>
 
-    <div class="button" disabled>disabled</div>
-    <div class="button"><img src="images/edit_card.gif"/>with icon</div>
-    <div class="button" style="font-size: 150%">small</div>
-    <div class="button" style="font-size: 300%">giant</div>
+    <div class="button disabled">disabled</div><br/>
+    <div class="button"><img src="images/edit_card.gif"/>with icon</div><br/>
+    <button class="button">button tag</button><br/>
+    <div class="button icon-only"><img src="images/edit_card.gif"/></div><br/>
+    <div class="button icon-only" style="font-size: 1000%;"><img src="images/edit_card.gif"/></div><br/>
+    <div class="button" style="font-size: 150%">small</div><br/>
+    <div class="button" style="font-size: 300%">big</div><br/>
+    <div class="button" style="font-size: 1000%">super giant</div><br/>
 </div>
 
 </body>
