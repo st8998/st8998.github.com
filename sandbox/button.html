@@ -12,17 +12,23 @@
         }
 
         @font-face {
-            font-family: 'Bebas';
-            src: local('@'), url('images/BEBAS___.ttf') format('truetype'), url('images/bebas___-webfont.svg#webfont4YQzfMDi') format('svg');
+        	font-family: 'BebasRegular';
+            src: url('fonts/BEBAS___-webfont.eot');
+            src: local('☺'), url('fonts/BEBAS___-webfont.woff') format('woff'), url('fonts/BEBAS___-webfont.ttf') format('truetype'), url('fonts/BEBAS___-webfont.svg#webfontnqJLEELI') format('svg');
+            font-weight: normal;
+            font-style: normal;
         }
+
         @font-face {
-            font-family: 'Icons';
-            src: local('@'), url('images/Guifx_v2_Transports.ttf') format('truetype'), url('images/guifx_v2_transports-webfont.svg') format('svg');
+            font-family: 'Guifxv2TransportsRegular';
+            src: url('fonts/Guifxv2Transports.eot');
+            src: local('☺'), url('fonts/Guifxv2Transports.woff') format('woff'), url('fonts/Guifxv2Transports.ttf') format('truetype'), url('fonts/Guifxv2Transports.svg#webfontdWlpFk6h') format('svg');
         }
+
         .button {
             text-transform: uppercase;
             text-align: center;
-            font-family: 'Bebas', arial, sans;
+            font-family: 'BebasRegular', arial, sans;
             font-weight: bold;
             text-decoration: none;
             letter-spacing: -0.05em;
@@ -97,6 +103,8 @@
         .button.icon-only {
             width: 1em;
             padding: 0;
+            letter-spacing: 0;
+            word-spacing: 0;
         }
         .button.icon-only img {
             left: 0;
@@ -108,7 +116,8 @@
             margin: 10px 0;
         }
         .icon-font {
-            font-family: 'Icons';
+            text-transform: none;
+            font-family: 'Guifxv2TransportsRegular', arial, sans;
         }
     </style>
 </head>
@@ -147,6 +156,7 @@
     <div class="button" style="font-size: 150%">small</div><br/>
     <div class="button" style="font-size: 300%">big</div><br/>
     <div class="button" style="font-size: 1000%">super giant</div><br/>
+    <div class="button icon-only icon-font">1</div>
     <div class="button icon-only icon-font" style="font-size: 300%">1</div>
     <div class="button icon-only icon-font" style="font-size: 400%">1</div>
     <div class="button icon-only icon-font" style="font-size: 500%">1</div>
