@@ -88,6 +88,11 @@
             vertical-align: middle;
             position: relative;
             left: -0.3em;
+            width: 0.7em;
+            height: 0.7em;
+        }
+        .button.disabled img {
+            opacity: .5;
         }
         .button.icon-only {
             width: 1em;
@@ -125,14 +130,20 @@
     });
 </script>
 
-<div style="width: 600px; margin: 0 auto;">
-    <a href="#" class="button">more</a>  <br/>
-
-    <div class="button disabled">disabled</div><br/>
-    <div class="button"><img src="images/edit_card.gif"/>with icon</div><br/>
+<div style="width: 600px; margin: 0 auto; vertical-align: text-top;">
+    <a href="#" class="button">link tag</a>
     <button class="button">button tag</button><br/>
-    <div class="button icon-only"><img src="images/edit_card.gif"/></div><br/>
-    <div class="button icon-only" style="font-size: 1000%;"><img src="images/edit_card.gif"/></div><br/>
+    <div class="button disabled">disabled</div><br/>
+    <div class="button"><img src="images/edit_card.gif"/>with icon</div>
+    <div class="button disabled"><img src="images/edit_card.gif"/>with icon</div><br/>
+    <div class="button" style="font-size: 300%;"><img src="images/edit_card.gif"/>with icon</div><br/>
+    <div class="button" style="font-size: 400%;"><img src="images/edit_card.gif"/>with icon</div><br/>
+    <div class="button icon-only"><img src="images/edit_card.gif"/></div>
+    <div class="button icon-only" style="font-size: 300%;"><img src="images/edit_card.gif"/></div>
+    <div class="button icon-only" style="font-size: 400%;"><img src="images/edit_card.gif"/></div>
+    <div class="button icon-only" style="font-size: 500%;"><img src="images/edit_card.gif"/></div>
+    <div class="button icon-only" style="font-size: 600%;"><img src="images/edit_card.gif"/></div>
+    <div class="button icon-only disabled" style="font-size: 600%;"><img src="images/edit_card.gif"/></div><br/>
     <div class="button" style="font-size: 150%">small</div><br/>
     <div class="button" style="font-size: 300%">big</div><br/>
     <div class="button" style="font-size: 1000%">super giant</div><br/>
