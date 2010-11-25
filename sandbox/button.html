@@ -28,10 +28,10 @@
         .button {
             text-transform: uppercase;
             text-align: center;
-            font-family: 'BebasRegular', arial, sans;
-            font-weight: bold;
+            font-family: 'BebasRegular', arial, sans;           
             text-decoration: none;
-            letter-spacing: -0.05em;
+            letter-spacing: 0;
+            word-spacing: .2em;
             display: inline-block;
             font-size: 200%;
             line-height: 1em;
@@ -91,11 +91,12 @@
         }
 
         .button img {
-            vertical-align: middle;
+            /*vertical-align: middle;*/
             position: relative;
             left: -0.3em;
             width: 0.7em;
             height: 0.7em;
+            padding: 0.1em 0;
         }
         .button.disabled img {
             opacity: .5;
@@ -165,7 +166,7 @@
     <div class="button icon-only icon-font" style="font-size: 600%">2</div>
     <div class="button icon-only icon-font" style="font-size: 700%">2</div>
     <div class="button icon-only icon-font" style="font-size: 800%">2</div>
-    <div class="button icon-only icon-font" style="font-size: 900%">2</div>
+    <div class="button icon-only icon-font" style="font-size: 900%"><span>2</span></div>
     <div class="button icon-only icon-font disabled" style="font-size: 900%">2</div><br/>
 </div>
 
