@@ -5,6 +5,7 @@ $(function() {
     VK.init({
         apiId: 2023842
     });
+    VK.UI.button('login_button');
     VK.Auth.getLoginStatus(function(response) {
         window.userID = response.session.mid;
         console.log('Logged in vkontakte with user id: ' + response.session.mid);
