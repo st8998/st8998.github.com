@@ -18,7 +18,8 @@ $(function() {
         var tracks = _(r.response).chain().first(20).map(function(track) {
             return '<li><strong>' + track.artist + '</strong> - ' + track.title + '</li>';
         }).value();
-        $anchor.after('<ul>' + tracks.join('') + '</ul>');
+        $anchor.after('<ul>' + tracks.join('') + '</ul><div class="more"><button>MORE</button></div>');
+
     }
 
     $searchForm.submit(function() {
