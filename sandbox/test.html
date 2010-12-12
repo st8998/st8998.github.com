@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Some Test Code</title>
+    <script src="../javascripts/jquery.js" type="text/javascript"></script>
+</head>
+<body>
+<script type="text/javascript">
+
+    var part = (function() {
+
+        function getName() {
+            return this.innerName;
+        }
+
+        function setName(name) {
+            this.innerName = name;
+            return this;
+        }
+
+        return function(name) {
+            this.innerName = name || 'DEFAULT NAME';
+            this.getName = getName;
+            this.setName = setName;
+        }
+    })();
+
+    var foo = {};
+    var bar = {};
+
+    part.call(foo, '[FOO] name');
+    part.call(bar, '[BAR] name');
+
+    console.log(foo.getName());
+    console.log(bar.getName());
+    console.log(getName());
+
+    console.log(bar.getName === foo.getName);
+
+</script>
+
+</body>
+</html>
