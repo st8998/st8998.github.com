@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>YUI Experiments</title>
+    <script type="text/javascript" charset="utf-8"
+            src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js">
+    </script>
+    <style>
+        .driller {
+            height: 100px;
+            width: 200px;
+            border: 4px dashed #CCC;
+            border-radius: 5px;
+        }
+        .centered {
+            line-height: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+<script type="text/javascript">
+
+    YUI().use('node', function(Y) {
+        Y.one('div').addClass('driller').addClass('centered');
+    });
+
+</script>
+
+<div>Joppa Driller</div>
+
+</body>
+</html>
