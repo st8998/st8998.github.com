@@ -23,8 +23,19 @@
 <body>
 <script type="text/javascript">
 
-    YUI().use('node', function(Y) {
-        Y.one('div').addClass('driller').addClass('centered');
+    YUI.add('node++', function(Y) {
+
+        function awesome() {
+            return this.addClass('driller').addClass('centered');
+        }
+
+        Y.Node.addMethod('awesome', awesome);
+        Y.NodeList.importMethod(Y.Node.prototype, 'awesome');
+
+    }, '0.0.1', {requires: ['node']});
+
+    YUI().use('node++', function(Y) {
+        Y.all('div').awesome();
     });
 
 </script>
