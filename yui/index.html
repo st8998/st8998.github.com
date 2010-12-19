@@ -24,20 +24,37 @@
 <body>
 <script type="text/javascript">
 
-    YUI({
-        modules: {
-            'node-awesome': {
-                fullpath: 'node-awesome-module.js',
-                requires: ['node']
-            }
+    YUI().use('base', function(Y) {
+        function Foo() {
+            Foo.superclass.constructor.apply(this, arguments);
         }
-    }).use('node-awesome', function(Y) {
-        Y.all('div').awesome();
 
-        Y.one('div').on('click', function() {
-            Y.log('JOPPA DRILLER');
-            Y.log(arguments);
+        Foo.NAME = 'foo';
+        Foo.ATTRS = {
+            foo: {
+                value: 'joppa driller'
+            }
+        };
+
+        Y.extend(Foo, Y.Base, {
+            doSomething: function() {
+                Y.log('some code must be here');
+            },
+            writeFoo: function(foo) {
+                this.set('foo', foo);
+            }
         });
+
+        var foo = new Foo();
+
+        foo.on('fooChange', function(e) {
+            Y.log('someone try to set foo to: ' + e.newVal);
+        });
+
+        foo.doSomething();
+        foo.writeFoo('drill drill drill');
+        Y.log(foo.get('foo'));
+
     });
 
 </script>
