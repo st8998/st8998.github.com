@@ -13,6 +13,7 @@
             border: 4px dashed #CCC;
             border-radius: 5px;
         }
+
         .centered {
             line-height: 100px;
             text-align: center;
@@ -23,18 +24,14 @@
 <body>
 <script type="text/javascript">
 
-    YUI.add('node++', function(Y) {
-
-        function awesome() {
-            return this.addClass('driller').addClass('centered');
+    YUI({
+        modules: {
+            'node-awesome': {
+                fullpath: 'node-awesome-module.js',
+                requires: ['node']
+            }
         }
-
-        Y.Node.addMethod('awesome', awesome);
-        Y.NodeList.importMethod(Y.Node.prototype, 'awesome');
-
-    }, '0.0.1', {requires: ['node']});
-
-    YUI().use('node++', function(Y) {
+    }).use('node-awesome', function(Y) {
         Y.all('div').awesome();
     });
 
