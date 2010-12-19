@@ -33,6 +33,11 @@
         }
     }).use('node-awesome', function(Y) {
         Y.all('div').awesome();
+
+        Y.one('div').on('click', function() {
+            Y.log('JOPPA DRILLER');
+            Y.log(arguments);
+        });
     });
 
 </script>
