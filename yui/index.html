@@ -10,8 +10,8 @@
         .driller {
             height: 100px;
             width: 200px;
-            border: 4px dashed #CCC;
-            border-radius: 5px;
+            background-color: #DDD;
+            overflow: hidden;
         }
 
         .centered {
@@ -24,42 +24,31 @@
 <body>
 <script type="text/javascript">
 
-    YUI().use('base', function(Y) {
-        function Foo() {
-            Foo.superclass.constructor.apply(this, arguments);
-        }
-
-        Foo.NAME = 'foo';
-        Foo.ATTRS = {
-            foo: {
-                value: 'joppa driller'
-            }
-        };
-
-        Y.extend(Foo, Y.Base, {
-            doSomething: function() {
-                Y.log('some code must be here');
-            },
-            writeFoo: function(foo) {
-                this.set('foo', foo);
+    YUI.add('node-anim', function(Y) {
+        Y.Node.addMethod('toggleSlide', function() {
+            this.fx.stop();
+            if (this.get('offsetHeight') == 0) {
+                new Y.Anim({node: this, to: {height: '100px'}, duration: 2}).run();
+            } else {
+                new Y.Anim({node: this, to: {height: 0}, duration: 2}).run();
             }
         });
+        Y.NodeList.importMethod(Y.Node.prototype, 'toggleSlide');
+    }, '0.0.1', {requires: ['node', 'anim']});
 
-        var foo = new Foo();
+    YUI().use('node-anim', function(Y) {
 
-        foo.on('fooChange', function(e) {
-            Y.log('someone try to set foo to: ' + e.newVal);
+        var driller = Y.one('.driller');
+        Y.one('button').on('click', function() {
+            driller.toggleSlide();
         });
-
-        foo.doSomething();
-        foo.writeFoo('drill drill drill');
-        Y.log(foo.get('foo'));
 
     });
 
 </script>
 
-<div>Joppa Driller</div>
+<button>Click ME</button>
+<div class="driller">Joppa Driller Joppa Driller Joppa Driller Joppa Driller Joppa Driller Joppa Driller Joppa Driller</div>
 
 </body>
 </html>
