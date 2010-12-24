@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>PixelWall Prototype 5</title>
+    <script src="../javascripts/jquery.js" type="text/javascript"></script>
+    <script src="../javascripts/jquery.tmpl.js" type="text/javascript"></script>
+    <script src="javascripts/shotspull.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8"
+            src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js"></script>
+    <style>
+        body {
+            background: #000 url('images/bg_lines_pattern.png');
+        }
+
+        #container {
+            width: 0;
+            cursor: move;
+            margin-top: 20px;
+            overflow: hidden;
+            height: 620px;
+        }
+
+        div.shotsGroup {
+            height: 600px;
+            float: left;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        div.shot {
+            width: 400px;
+            height: 300px;
+            position: relative;
+            float: left;
+        }
+
+        div.shot div.preloader {
+            margin: 0;
+            width: 400px;
+            height: 300px;
+            background: #505050;
+        }
+
+        div.shot img {
+            top: 0;
+            left: 0;
+            width: 400px;
+            height: 300px;
+            z-index: 2;
+        }
+
+        div.shot div.buttons {
+            position: absolute;
+            z-index: 1;
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/x-jquery-tmpl" id="shotTemplate">
+    <div class="shot">
+        <img src="${image_url}" alt="${title}"/>
+    </div>
+</script>
+
+<script type="text/javascript">
+    $(function() {
+
+        var $shotTemplate = $('#shotTemplate');
+        var $container = $('#container');
+        var $window = $(window);
+
+        var shotsPull = new ShotsPull();
+
+        shotsPull.get(30, renderShots);
+
+        function renderShots(shots) {
+            $container.width($container.width() + 200 * shots.length);
+            var $shotsGroup = $('<div>', {
+                'class': 'shotsGroup',
+                'css': {width: 200 * shots.length}
+            }).appendTo($container);
+            $shotTemplate.tmpl(shots).appendTo($shotsGroup);
+
+            YUI().use('scrollview', function(Y) {
+                new Y.ScrollView({
+                    srcNode: '#container',
+                    width: $window.width(),
+                    flick: {
+                        preventDefault:function(e) {
+                            // Prevent image drag in gecko (assuming non-touch for this example).
+                            return (Y.UA.gecko);
+                        },
+                        minDistance:1,
+                        minVelocity:1
+                    },
+                    deceleration: 0.95
+                }).render();
+            });
+        }
+
+    });
+</script>
+<div id="container"></div>
+</body>
+</html>
