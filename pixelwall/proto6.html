@@ -87,7 +87,7 @@
             $shotTemplate.tmpl(shots).appendTo($shotsGroup);
 
             YUI().use('scrollview', function(Y) {
-                new Y.ScrollView({
+                var scrollview = new Y.ScrollView({
                     srcNode: '#container',
                     width: $window.width(),
                     flick: {
@@ -95,11 +95,15 @@
                             // Prevent image drag in gecko (assuming non-touch for this example).
                             return (Y.UA.gecko);
                         },
-                        minDistance:1,
+                        minDistance:5,
                         minVelocity:1
                     },
                     deceleration: 0.95
-                }).render();
+                });
+
+		scrollview.scrollbars.show();
+
+		scrollview.render();
             });
         }
 
