@@ -1,0 +1,91 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Trebuchet MS';
+}
+
+body {
+    width: 1000px;
+    margin: 20px auto;
+}
+
+#container {
+    background-color: #DDD;
+    margin: 0 auto;
+    width: 840px;
+}
+
+#carousel {
+    margin: 10px;
+    overflow: hidden;
+}
+
+.page {
+    float: left;
+    height: 300px;
+    width: 40px;
+    position: relative;
+    &.active {
+        width: 740px;
+        .header {
+            background-color: #000;
+            color: #FFF;
+        }
+        .content {
+            display: block;
+        }
+    }
+    .header {
+        float: left;
+        width: 40px;
+        height: 100%;
+        position: reative;
+        background-color: #FFF;
+        color: #000;
+        p {
+            position: absolute;
+            width: 250px;
+            height: 40px;
+            line-height: 40px;
+            top: 240px;
+            margin-left: -20px;
+            text-align: right;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            -webkit-transform: rotate(270deg);
+            -webkit-transform-origin-x: 20px;
+            -webkit-transform-origin-y: 0;
+            -moz-transform: rotate(270deg);
+            -moz-transform-origin-x: 20px;
+            -moz-transform-origin-y: 0;
+        }
+        span {
+            display: block;
+            padding-top: 255px;
+            line-height: 40px;
+            width: 40px;
+            text-align: center;
+            font-size: 200%;
+        }
+    }
+    .content {
+        display: none;
+        float: left;
+        width: 700px;
+        height: 100%;
+        .arrow {
+            margin: 20px 0;
+            float: left;
+        }
+        h1 {
+            background-color: #ffcccc;
+        }
+    }
+}
+
+.arrow {
+    border-left: 10px solid #000;
+    border-bottom: 10px solid transparent;
+    border-top: 10px solid transparent;
+}
