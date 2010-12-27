@@ -12,36 +12,30 @@ body {
 #container {
     background-color: #DDD;
     margin: 0 auto;
-    width: 840px;
+    width: 740px;
 }
 
 #carousel {
-    margin: 10px;
     overflow: hidden;
+    width: 2220px;
+    &.yui3-scrollview-loading {
+        width: 740px;
+        height: 300px;
+    }
 }
 
 .page {
     float: left;
     height: 300px;
-    width: 40px;
+    width: 740px;
     position: relative;
-    &.active {
-        width: 740px;
-        .header {
-            background-color: #000;
-            color: #FFF;
-        }
-        .content {
-            display: block;
-        }
-    }
     .header {
         float: left;
         width: 40px;
         height: 100%;
         position: reative;
-        background-color: #FFF;
-        color: #000;
+        background-color: #000;
+        color: #FFF;
         p {
             position: absolute;
             width: 250px;
@@ -57,8 +51,7 @@ body {
             -webkit-transform-origin-x: 20px;
             -webkit-transform-origin-y: 0;
             -moz-transform: rotate(270deg);
-            -moz-transform-origin-x: 20px;
-            -moz-transform-origin-y: 0;
+            -moz-transform-origin: 20px 0;
         }
         span {
             display: block;
@@ -70,7 +63,6 @@ body {
         }
     }
     .content {
-        display: none;
         float: left;
         width: 700px;
         height: 100%;

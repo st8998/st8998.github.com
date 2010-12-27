@@ -11,7 +11,7 @@
 <body>
 
 <div id="container">
-    <div id="carousel">
+    <div id="carousel" class="yui3-scrollview-loading">
         <div class="page">
             <div class="header">
                 <p>joppa driller</p>
@@ -22,7 +22,7 @@
                 <h1>JOPPA DRILLER</h1>
             </div>
         </div>
-        <div class="page active">
+        <div class="page">
             <div class="header">
                 <p>another driller</p>
                 <span>2</span>
@@ -46,12 +46,33 @@
 </div>
 
 <script type="text/javascript">
-    YUI().use('node', function(Y) {
-        var tabs = Y.all('#carousel .page');
-        Y.delegate('click', function(e) {
-            tabs.removeClass('active');
-            this.ancestor().addClass('active');
-        }, '#carousel', '.header');
+    YUI().use('scrollview-base', 'scrollview-paginator', function(Y) {
+        var scrollview = new Y.ScrollView({
+            srcNode: '#carousel',
+            width: 740,
+            flick: {
+                preventDefault:function(e) {
+                    // Prevent image drag in gecko (assuming non-touch for this example).
+                    return (Y.UA.gecko);
+                },
+                minDistance:5,
+                minVelocity:1
+            },
+            deceleration: 0.98
+        });
+        scrollview.plug(Y.Plugin.ScrollViewPaginator, {
+            selector: '.page'
+        });
+        scrollview.render();
+
+        Y.one('#carousel').on('mousewheel', function(e) {
+            if (e.wheelDelta < 0) {
+                scrollview.pages.next();
+            } else {
+                scrollview.pages.prev();
+            }
+        });
+
     });
 </script>
 
